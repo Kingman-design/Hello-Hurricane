@@ -6,6 +6,8 @@ public class PlatformManager : MonoBehaviour
 
     [SerializeField] private GameObject platformPrefab;
 
+    [SerializeField] float platformSpeed = 10f;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -20,7 +22,7 @@ public class PlatformManager : MonoBehaviour
     public void SpawnNextPlatform(Vector3 _posA)
     {
         // Instantiate a new platform at the calculated end position
-        GameObject newPlatform = Instantiate(platformPrefab, GetEndPosition(_posA), Quaternion.identity);
+        Instantiate(platformPrefab, GetEndPosition(_posA), Quaternion.identity, transform);
     }
 
     Vector3 GetEndPosition(Vector3 _posA) 
@@ -36,5 +38,10 @@ public class PlatformManager : MonoBehaviour
         }
 
         return endPos;
+    }
+
+    public float GetPlatformSpeed() 
+    {
+        return platformSpeed;
     }
 }
