@@ -72,7 +72,7 @@ public class BuildingManager : MonoBehaviour
 
     public Vector3 GetFinalPosition(GameObject _currBuilding, Vector3 _offset = default(Vector3), bool isLeftBuilding = false)
     {
-        Vector3 endPos = PlatformManager.Instance.latestPlatform.transform.position;
+        Vector3 endPos = _currBuilding.transform.position;
         Renderer currBuldRenderer = _currBuilding.GetComponent<Building>().GetBuildingRenderer();
 
         if (platformRenderer == null)

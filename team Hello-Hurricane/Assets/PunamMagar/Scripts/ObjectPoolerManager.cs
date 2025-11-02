@@ -14,7 +14,8 @@ public class ObjectPoolerManager : MonoBehaviour
         public int size;
     }
 
-    [SerializeField] List<Pool> pools;
+    [SerializeField] List<Pool> buildings;
+    //[SerializeField] List<Pool> obstacles;
 
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
@@ -33,18 +34,18 @@ public class ObjectPoolerManager : MonoBehaviour
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
-        foreach (Pool pool in pools) 
+        foreach (Pool building in buildings) 
         {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
+            Queue<GameObject> buildingPool = new Queue<GameObject>();
 
-            for (int i = 0; i < pool.size; i++) 
+            for (int i = 0; i < building.size; i++) 
             {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj = Instantiate(building.prefab);
                 obj.SetActive(false);
-                objectPool.Enqueue(obj);
+                buildingPool.Enqueue(obj);
             }
 
-            poolDictionary.Add(pool.tag, objectPool);
+            poolDictionary.Add(building.tag, buildingPool);
         }
     }
 
@@ -69,10 +70,15 @@ public class ObjectPoolerManager : MonoBehaviour
     }
 
     public string GetRandomObjectTag() 
-
     {
         int randomIndex = Random.Range(0, poolDictionary.Count);
         return poolDictionary.ElementAt(randomIndex).Key;
+    }
+
+    public string GetRandomBuildingTag()
+    {
+        int randomIndex = Random.Range(0, buildings.Count);
+        return buildings[randomIndex].tag;
     }
 
     public void ReturnToPool(string tag, GameObject obj)

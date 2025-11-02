@@ -29,7 +29,7 @@ public class BuildingSpwaner : MonoBehaviour
         objectPoolerManager = ObjectPoolerManager.Instance;
         platformManager = PlatformManager.Instance;
 
-        transform.position = platformManager.latestPlatform.transform.position;
+        //transform.position = platformManager.latestPlatform.transform.position;
     }
 
     // Update is called once per frame
@@ -47,7 +47,7 @@ public class BuildingSpwaner : MonoBehaviour
 
     public void SpwanBuilding() 
     {
-        string randTag = objectPoolerManager.GetRandomObjectTag();
+        string randTag = objectPoolerManager.GetRandomBuildingTag();
 
         currBuilding = objectPoolerManager.SpawnFromPool(randTag, transform.position, Quaternion.identity);
         currBuilding.GetComponentInParent<Transform>().parent = transform;
@@ -56,9 +56,9 @@ public class BuildingSpwaner : MonoBehaviour
 
         Vector3 finalPos = Vector3.zero;
 
+        // If this is the first building to be placed`
         if (latestBuilding == null)
         {
-            // Just place it on the platform with offset
             if (Side == BuildingSide.Left)
             {
                 finalPos = BuildingManager.Instance.GetFinalPosition(currBuilding, buildingOffset, true);
@@ -69,7 +69,6 @@ public class BuildingSpwaner : MonoBehaviour
             }
             currBuilding.transform.position = finalPos;
 
-            // Now establish the first building reference
             latestBuilding = currBuilding;
             return;
         }
