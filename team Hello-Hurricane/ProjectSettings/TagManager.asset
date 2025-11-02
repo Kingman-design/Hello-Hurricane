@@ -6,9 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Player-MisealTest
-  - Jump-MGTest
   - Duck-MGTest
   - Dodge-MGTest
+  - JumpMG
   layers:
   - Default
   - TransparentFX
