@@ -1,8 +1,15 @@
+using System.Runtime.Serialization;
 using UnityEngine;
 
 public class Building : MonoBehaviour
 {
     float moveSpeed;
+
+    [HideInInspector]
+    public string tagName;
+
+    [SerializeField] Renderer buildingRenderer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,5 +27,13 @@ public class Building : MonoBehaviour
         transform.Translate(Vector3.forward * -moveSpeed * Time.deltaTime);
     }
 
-    
+    public void ReturnBuilding() 
+    {
+        ObjectPoolerManager.Instance.ReturnToPool(tagName, gameObject);
+    }
+
+    public Renderer GetBuildingRenderer() 
+    {
+        return buildingRenderer;
+    }
 }
