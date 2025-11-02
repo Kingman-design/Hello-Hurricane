@@ -7,10 +7,12 @@ public class PlatformManager : MonoBehaviour
     [SerializeField] private GameObject platformPrefab;
 
     public GameObject latestPlatform;
-    
-    [SerializeField] float platformSpeed = 10f;
 
     Renderer platformModelRenderer;
+
+    [Header("Speed Settings")]
+    [SerializeField] float speed = 10f;
+    [SerializeField] float speedIncreaseRate = 0.1f;
 
     void Awake()
     {
@@ -29,6 +31,11 @@ public class PlatformManager : MonoBehaviour
         {
             platformModelRenderer = platformPrefab.GetComponent<Platform>().GetModelRenderer();
         }
+    }
+
+    private void Update()
+    {
+        speed += speedIncreaseRate * Time.deltaTime;
     }
 
     public void SpawnNextPlatform(Vector3 _posA)
@@ -51,9 +58,9 @@ public class PlatformManager : MonoBehaviour
         return endPos;
     }
 
-    public float GetPlatformSpeed() 
+    public float GetSpeed() 
     {
-        return platformSpeed;
+        return speed;
     }
 
     public Renderer GetPlatformRenderer() 

@@ -583,7 +583,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2433952384400447683, guid: 03ac9159632209e4b88f6f3e3acd0970, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2433952384400447683, guid: 03ac9159632209e4b88f6f3e3acd0970, type: 3}
       propertyPath: m_LocalPosition.y
@@ -908,8 +908,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformPrefab: {fileID: 5175872285336961332, guid: 03ac9159632209e4b88f6f3e3acd0970, type: 3}
-  latestPlatform: {fileID: 7791344920655898148}
-  platformSpeed: 10
+  latestPlatform: {fileID: 1846180512}
+  speed: 10
+  speedIncreaseRate: 0.05
 --- !u!4 &1815415960
 Transform:
   m_ObjectHideFlags: 0
@@ -926,6 +927,11 @@ Transform:
   - {fileID: 2102966912}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1846180512 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5175872285336961332, guid: 03ac9159632209e4b88f6f3e3acd0970, type: 3}
+  m_PrefabInstance: {fileID: 694769386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2006600195
 GameObject:
   m_ObjectHideFlags: 0

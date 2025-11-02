@@ -6,15 +6,18 @@ public class Platform : MonoBehaviour
 
     [SerializeField] float moveSpeed = 2f;
 
+    PlatformManager platformManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        moveSpeed = PlatformManager.Instance.GetPlatformSpeed();
+        platformManager = PlatformManager.Instance;
     }
 
     // Update is called once per frame
     void Update()
     {
+        moveSpeed = platformManager.GetSpeed();
         Movement();
     }
 

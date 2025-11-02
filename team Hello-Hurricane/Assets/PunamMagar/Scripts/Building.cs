@@ -10,16 +10,24 @@ public class Building : MonoBehaviour
 
     [SerializeField] Renderer buildingRenderer;
 
+    PlatformManager platformManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        moveSpeed = PlatformManager.Instance.GetPlatformSpeed();
+        platformManager = PlatformManager.Instance;
     }
 
     // Update is called once per frame
     void Update()
     {
+        moveSpeed = platformManager.GetSpeed();
         Movement();
+    }
+
+    private void LateUpdate()
+    {
+        
     }
 
     void Movement() 
