@@ -530,6 +530,7 @@ MonoBehaviour:
   gravity: 30
   jumpspeed: 12
   speed: 3
+  sidestepSpeed: 20
   rb: {fileID: 184334481}
 --- !u!54 &184334481
 Rigidbody:

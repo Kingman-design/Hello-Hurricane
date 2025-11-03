@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class EnemyAi : MonoBehaviour
 {
@@ -8,10 +9,13 @@ public class EnemyAi : MonoBehaviour
     [SerializeField] int gravity;
     [SerializeField] int jumpspeed;
     [SerializeField] int speed;
+    [SerializeField] int sidestepSpeed;
     [SerializeField] Rigidbody rb;
     //[SerializeField] NavMeshAgent agent;
 
     bool ObstacleTrigger;
+    bool JumpTrigger;
+    bool DuckTrigger;
     Vector3 EnemyVel;
 
     
@@ -27,9 +31,13 @@ public class EnemyAi : MonoBehaviour
     {
         enemyMovement();
 
-        if(ObstacleTrigger)
+        if(JumpTrigger)
         {
             DodgeJump();
+        }
+        else if (ObstacleTrigger)
+        {
+            DodgeMove();
         }
         else
         {
@@ -44,6 +52,10 @@ public class EnemyAi : MonoBehaviour
     {
         if (other.CompareTag("JumpMG"))
         {
+            JumpTrigger = true;
+        }
+        else if (other.CompareTag("Dodge-MGTest"))
+        {
             ObstacleTrigger = true;
         }
     }
@@ -52,8 +64,18 @@ public class EnemyAi : MonoBehaviour
     {
         if (other.CompareTag("JumpMG"))
         {
+            JumpTrigger = false;
+        }
+        else if (other.CompareTag("Dodge-MGTest"))
+        {
+            StartCoroutine(Sidestep());
             ObstacleTrigger = false;
         }
+    }
+
+    IEnumerator Sidestep()
+    {
+        yield return new WaitForSeconds(2.00f);
     }
 
     void enemyMovement()
@@ -69,6 +91,11 @@ public class EnemyAi : MonoBehaviour
     void DodgeJump()
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpspeed, rb.linearVelocity.z);
+    }
+
+    void DodgeMove()
+    {
+        rb.linearVelocity = new Vector3(sidestepSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
     }
 
 }
