@@ -8,13 +8,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField] int JumpSpeed;
     [SerializeField] int maxJumps;
     [SerializeField] int gravity;
-
+    [SerializeField] float targettime;
     Vector3 moveDir;
     Vector3 playerVel;
 
     int jumpCount;
     float timer = 0;
-    float targettime = 0.5f;
+    int oldgravity = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,11 +27,17 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (transform.localScale.y == 0.5f)
         {
+            if (gravity < 50)
+            {
+               oldgravity = gravity;
+            }
+            gravity = 1000;
             timer += Time.deltaTime;
             if (timer >= targettime)
             {
                 transform.localScale = new Vector3(1, 1, 1);
                 timer = 0;
+                gravity = oldgravity;
             }
         }
         movement();  
