@@ -507,6 +507,7 @@ MonoBehaviour:
   JumpSpeed: 12
   maxJumps: 1
   gravity: 35
+  targettime: 0.75
 --- !u!143 &606782586
 CharacterController:
   m_ObjectHideFlags: 0

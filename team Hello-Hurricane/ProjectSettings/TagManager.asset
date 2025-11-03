@@ -9,6 +9,10 @@ TagManager:
   - Duck-MGTest
   - Dodge-MGTest
   - JumpMG
+  - Platform
+  - PlatformSpwanTrigger
+  - DestroyPlatform
+  - DestroyBuilding
   layers:
   - Default
   - TransparentFX
