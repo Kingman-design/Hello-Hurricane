@@ -59,12 +59,10 @@ public class BuildingManager : MonoBehaviour
             endPos.y += halfY;
 
             float zOffset = 0f;
-            if (_offset.z != 0) 
-            {
-                zOffset = Random.Range(_offset.z, _offset.z + zOffsetRange);
-            }
+            zOffset = Random.Range(_offset.z, _offset.z + zOffsetRange);
 
-            endPos.z = _lastBuilding.transform.position.z + halfZ + zOffset;
+            endPos.z += _lastBuilding.transform.position.z + halfZ + zOffset;
+            endPos.z += _offset.z;
         }
 
         return endPos -= _offset;
