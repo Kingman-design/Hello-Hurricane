@@ -11,7 +11,9 @@ public class EnemyAi : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int sidestepSpeed;
     [SerializeField] Rigidbody rb;
-    //[SerializeField] NavMeshAgent agent;
+    
+    float OrigSize;
+
 
     bool ObstacleTrigger;
     bool JumpTrigger;
@@ -23,6 +25,14 @@ public class EnemyAi : MonoBehaviour
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player-MisealTest").GetComponent<Transform>();
+        EnemyVel = transform.localScale;
+
+        Debug.Log(EnemyVel);
+       
+        OrigSize = EnemyVel.y;
+        
+        Debug.Log(OrigSize);
+        
         rb.freezeRotation = true;
     }
 
@@ -38,6 +48,10 @@ public class EnemyAi : MonoBehaviour
         else if (ObstacleTrigger)
         {
             DodgeMove();
+        }
+        else if (DuckTrigger)
+        {
+            DodgeDuck();
         }
         else
         {
@@ -58,6 +72,10 @@ public class EnemyAi : MonoBehaviour
         {
             ObstacleTrigger = true;
         }
+        else if (other.CompareTag("Duck-MGTest"))
+        {
+            DuckTrigger = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -71,8 +89,22 @@ public class EnemyAi : MonoBehaviour
             StartCoroutine(Sidestep());
             ObstacleTrigger = false;
         }
+        else if (other.CompareTag("Duck-MGTest"))
+        {
+            StartCoroutine(Uncrouch());
+            DuckTrigger = false;
+        }
     }
 
+    IEnumerator Uncrouch()
+    {
+        Debug.Log("uncrouch start");
+        yield return new WaitForSeconds(1.0f);
+        Vector3 scale = transform.localScale;
+        scale.y = OrigSize;
+        transform.localScale = scale;
+        Debug.Log("uncrouch end");
+    }
     IEnumerator Sidestep()
     {
         yield return new WaitForSeconds(2.00f);
@@ -96,6 +128,13 @@ public class EnemyAi : MonoBehaviour
     void DodgeMove()
     {
         rb.linearVelocity = new Vector3(sidestepSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
+    }
+
+    void DodgeDuck()
+    {
+        EnemyVel = new Vector3(EnemyVel.x, 0.5f, EnemyVel.z);
+        transform.localScale = EnemyVel;
+        transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
     }
 
 }
