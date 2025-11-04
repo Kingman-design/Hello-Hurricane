@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ObjectPoolerManager : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class ObjectPoolerManager : MonoBehaviour
     }
 
     [SerializeField] List<Pool> buildings;
-    //[SerializeField] List<Pool> obstacles;
+    [SerializeField] List<Pool> buildingsBG;
+    [SerializeField] List<Pool> platforms;
 
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
@@ -46,6 +48,36 @@ public class ObjectPoolerManager : MonoBehaviour
             }
 
             poolDictionary.Add(building.tag, buildingPool);
+        }
+
+        //For Background Buildings
+        foreach (Pool building in buildingsBG) 
+        {
+            Queue<GameObject> buildingPool = new Queue<GameObject>();
+
+            for (int i = 0; i < building.size; i++)
+            {
+                GameObject obj = Instantiate(building.prefab);
+                obj.SetActive(false);
+                buildingPool.Enqueue(obj);
+            }
+
+            poolDictionary.Add(building.tag, buildingPool);
+        }
+
+        //For Platforms
+        foreach (Pool platform in platforms) 
+        {
+            Queue<GameObject> platformPool = new Queue<GameObject>();
+
+            for (int i = 0; i < platform.size; i++)
+            {
+                GameObject obj = Instantiate(platform.prefab);
+                obj.SetActive(false);
+                platformPool.Enqueue(obj);
+            }
+
+            poolDictionary.Add(platform.tag, platformPool);
         }
     }
 
@@ -79,6 +111,18 @@ public class ObjectPoolerManager : MonoBehaviour
     {
         int randomIndex = Random.Range(0, buildings.Count);
         return buildings[randomIndex].tag;
+    }
+
+    public string GetRandomBGBuildingTag() 
+    {
+        int randomIndex = Random.Range(0, buildingsBG.Count);
+        return buildingsBG[randomIndex].tag;
+    }
+
+    public string GetRandomPlatformTag() 
+    {
+        int randomIndex = Random.Range(0, platforms.Count);
+        return platforms[randomIndex].tag;
     }
 
     public void ReturnToPool(string tag, GameObject obj)

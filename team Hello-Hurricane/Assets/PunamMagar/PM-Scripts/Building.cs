@@ -3,11 +3,24 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
+    enum BuildingType 
+    {
+        Foreground,
+        Background
+    }
+
+    [Header("Background Building Settings")]
+    [SerializeField] BuildingType buildingType = BuildingType.Foreground;
+
+    [Range(0,1)]
+    [SerializeField] float backgroundSpeedFactor = 1f; 
+
     float moveSpeed;
 
     [HideInInspector]
     public string tagName;
 
+    [Header("")]
     [SerializeField] Renderer buildingRenderer;
 
     PlatformManager platformManager;
@@ -16,12 +29,17 @@ public class Building : MonoBehaviour
     void Start()
     {
         platformManager = PlatformManager.Instance;
+
+        if (buildingType == BuildingType.Foreground) 
+        {
+            backgroundSpeedFactor = 1.0f;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveSpeed = platformManager.GetSpeed();
+        moveSpeed = platformManager.GetSpeed() * backgroundSpeedFactor;
         Movement();
     }
 

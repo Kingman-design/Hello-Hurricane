@@ -5,8 +5,9 @@ public class PlatformManager : MonoBehaviour
     public static PlatformManager Instance;
 
     [SerializeField] private GameObject platformPrefab;
-
     public GameObject latestPlatform;
+
+    [SerializeField] Transform spwanTransform;
 
     Renderer platformModelRenderer;
 
@@ -14,6 +15,9 @@ public class PlatformManager : MonoBehaviour
     [SerializeField] float speed = 10f;
     [SerializeField] float speedIncreaseRate = 0.1f;
 
+    Platform latestPlatformScript;
+
+    ObjectPoolerManager objectPoolerManager;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -31,6 +35,8 @@ public class PlatformManager : MonoBehaviour
         {
             platformModelRenderer = platformPrefab.GetComponent<Platform>().GetModelRenderer();
         }
+
+        objectPoolerManager = ObjectPoolerManager.Instance;
     }
 
     private void Update()
@@ -40,7 +46,13 @@ public class PlatformManager : MonoBehaviour
 
     public void SpawnNextPlatform(Vector3 _posA)
     {
-        latestPlatform = Instantiate(platformPrefab, GetEndPosition(_posA), Quaternion.identity, transform);
+        //latestPlatform = Instantiate(platformPrefab, GetEndPosition(_posA), Quaternion.identity, transform);
+
+        string platformTag = objectPoolerManager.GetRandomPlatformTag();
+
+        latestPlatform = objectPoolerManager.SpawnFromPool(platformTag, spwanTransform.position, Quaternion.identity);
+        latestPlatformScript = latestPlatform.GetComponent<Platform>();
+        latestPlatformScript.tagName = platformTag;
     }
 
     Vector3 GetEndPosition(Vector3 _posA) 

@@ -6,6 +6,8 @@ public class Platform : MonoBehaviour
 
     [SerializeField] float moveSpeed = 2f;
 
+    public string tagName = "";
+
     PlatformManager platformManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

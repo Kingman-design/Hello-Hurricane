@@ -119,6 +119,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &76386485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 76386486}
+  - component: {fileID: 76386487}
+  m_Layer: 0
+  m_Name: BuildingSpwaner-Right-BG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &76386486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76386485}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1181539098}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &76386487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76386485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a343b6f67b9b241ada96cd35d085c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Side: 0
+  Type: 1
+  buildingOffset: {x: 50, y: 0, z: 5}
+  maxNumOfBuildings: 50
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,6 +843,8 @@ Transform:
   m_Children:
   - {fileID: 1755348707}
   - {fileID: 1421033555}
+  - {fileID: 76386486}
+  - {fileID: 2083809240}
   - {fileID: 2006600196}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -839,6 +889,16 @@ MonoBehaviour:
     size: 50
   - tag: Building-D
     prefab: {fileID: 844648153792085448, guid: ab38f905af2248f4faa550388fe34ed2, type: 3}
+    size: 50
+  buildingsBG:
+  - tag: BG_Building-A
+    prefab: {fileID: 7992833814653815069, guid: 77c009ea0391a3a46806d2db0c7f2aac, type: 3}
+    size: 50
+  - tag: BG_Building-B
+    prefab: {fileID: 6272723240295738700, guid: 66206d0cf7ac3004aae798817e40fdb6, type: 3}
+    size: 50
+  - tag: BG_Building-C
+    prefab: {fileID: 7302429149003506113, guid: 0045e5d215b123049b0674d0370e18fe, type: 3}
     size: 50
 --- !u!4 &1321614333
 Transform:
@@ -900,6 +960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Side: 1
+  Type: 0
   buildingOffset: {x: -5, y: 0, z: 5}
   maxNumOfBuildings: 50
 --- !u!1 &1542228596
@@ -1057,6 +1118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Side: 0
+  Type: 0
   buildingOffset: {x: 5, y: 0, z: 5}
   maxNumOfBuildings: 50
 --- !u!1 &1815415958
@@ -1194,6 +1256,54 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 500, y: 100, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2083809239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2083809240}
+  - component: {fileID: 2083809241}
+  m_Layer: 0
+  m_Name: BuildingSpwaner-Left-BG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2083809240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083809239}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1181539098}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2083809241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083809239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a343b6f67b9b241ada96cd35d085c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Side: 1
+  Type: 1
+  buildingOffset: {x: -50, y: 0, z: 5}
+  maxNumOfBuildings: 50
 --- !u!1 &2102966911
 GameObject:
   m_ObjectHideFlags: 0
