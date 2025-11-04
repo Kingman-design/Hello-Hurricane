@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class buttonFunction : MonoBehaviour
 {
@@ -12,5 +13,12 @@ public class buttonFunction : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void loadLevel(int lvl)
+    {
+        SceneManager.LoadScene(lvl);
+        //gameManager.instance.stateUnpause();
+
     }
 }
