@@ -1,6 +1,7 @@
+using System.Data;
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
 
@@ -8,6 +9,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     [SerializeField] int JumpSpeed;
     [SerializeField] int maxJumps;
     [SerializeField] int gravity;
+    [SerializeField] int HP;
     [SerializeField] float targettime;
     Vector3 moveDir;
     Vector3 playerVel;
@@ -78,4 +80,57 @@ public class NewMonoBehaviourScript : MonoBehaviour
             transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y - 1, transform.localPosition.z);
         }
     }
+
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
+
+        if (HP <= 0)
+        {
+            //you lose screen here
+        }
+    }
+
+    public int GetSpeed()
+    {
+        return speed;
+    }
+    public int GetJumpSpeed()
+    {
+        return JumpSpeed;
+    }
+    public int GetMaxJumps()
+    {
+        return maxJumps;
+    }
+    public int GetGravity()
+    {
+        return gravity;
+    }
+    public int GetHP()
+    {
+        return HP;
+    }
+
+    public void SetSpeed(int NewSpeed)
+    {
+        speed = NewSpeed;
+    }
+    public void SetJumpSpeed(int NewJumpSpeed)
+    {
+        JumpSpeed = NewJumpSpeed;
+    }
+    public void SetMaxJumps(int NewMaxJump)
+    {
+        maxJumps = NewMaxJump;
+    }
+    public void SetGravity(int NewGravity)
+    {
+        gravity = NewGravity;
+    }
+    public void SetHP(int NewHP)
+    {
+        HP = NewHP;
+    }
+
 }
