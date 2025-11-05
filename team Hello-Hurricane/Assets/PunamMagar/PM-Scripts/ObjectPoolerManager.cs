@@ -18,6 +18,7 @@ public class ObjectPoolerManager : MonoBehaviour
     [SerializeField] List<Pool> buildings;
     [SerializeField] List<Pool> buildingsBG;
     [SerializeField] List<Pool> platforms;
+    [SerializeField] List<Pool> obstacles;
 
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
@@ -79,6 +80,19 @@ public class ObjectPoolerManager : MonoBehaviour
 
             poolDictionary.Add(platform.tag, platformPool);
         }
+
+        //For Obstacles
+        foreach (Pool obstacle in obstacles)
+        {
+            Queue<GameObject> obstaclePool = new Queue<GameObject>();
+            for (int i = 0; i < obstacle.size; i++)
+            {
+                GameObject obj = Instantiate(obstacle.prefab);
+                obj.SetActive(false);
+                obstaclePool.Enqueue(obj);
+            }
+            poolDictionary.Add(obstacle.tag, obstaclePool);
+        }
     }
 
     public GameObject SpawnFromPool(string _tag, Vector3 _position, Quaternion _rotation) 
@@ -123,6 +137,12 @@ public class ObjectPoolerManager : MonoBehaviour
     {
         int randomIndex = Random.Range(0, platforms.Count);
         return platforms[randomIndex].tag;
+    }
+
+    public string GetRandomObstacleTag() 
+    {
+        int randomIndex = Random.Range(0, obstacles.Count);
+        return obstacles[randomIndex].tag;
     }
 
     public void ReturnToPool(string tag, GameObject obj)

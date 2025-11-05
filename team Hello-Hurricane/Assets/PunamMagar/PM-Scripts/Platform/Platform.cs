@@ -40,10 +40,10 @@ public class Platform : MonoBehaviour
 
     public void SpwanNextPlatform() 
     {
-        PlatformManager.Instance.SpawnNextPlatform(GetEndPosition());
+        PlatformManager.Instance.SpawnNextPlatform();
     }
 
-    Vector3 GetEndPosition() 
+    public Vector3 GetEndPosition() 
     {
         Bounds modelBound = modelRenderer.bounds;
 
@@ -61,5 +61,10 @@ public class Platform : MonoBehaviour
     public void DestroyPlatform()
     {
         Destroy(gameObject);
+    }
+
+    public void DeactivatePlatform()
+    {
+        ObjectPoolerManager.Instance.ReturnToPool(tagName, gameObject);
     }
 }

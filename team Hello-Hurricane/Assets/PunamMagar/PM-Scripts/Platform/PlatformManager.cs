@@ -9,6 +9,8 @@ public class PlatformManager : MonoBehaviour
 
     [SerializeField] Transform spwanTransform;
 
+    [SerializeField] int initialPlatformsToSpwan = 3;
+
     Renderer platformModelRenderer;
 
     [Header("Speed Settings")]
@@ -31,12 +33,12 @@ public class PlatformManager : MonoBehaviour
 
     private void Start()
     {
-        if (platformPrefab != null)
-        {
-            platformModelRenderer = platformPrefab.GetComponent<Platform>().GetModelRenderer();
-        }
-
         objectPoolerManager = ObjectPoolerManager.Instance;
+
+        for (int i = 0; i < initialPlatformsToSpwan; i++) 
+        {
+            SpawnNextPlatform();
+        }
     }
 
     private void Update()
@@ -44,13 +46,25 @@ public class PlatformManager : MonoBehaviour
         speed += speedIncreaseRate * Time.deltaTime;
     }
 
-    public void SpawnNextPlatform(Vector3 _posA)
+    public void SpawnNextPlatform()
     {
         //latestPlatform = Instantiate(platformPrefab, GetEndPosition(_posA), Quaternion.identity, transform);
 
+        Vector3 _posA;
+        if (latestPlatformScript != null)
+        {
+            _posA = latestPlatformScript.GetEndPosition();
+        }
+        else 
+        {
+            latestPlatformScript = platformPrefab.GetComponent<Platform>();
+            platformModelRenderer = latestPlatformScript.GetModelRenderer();
+            _posA = spwanTransform.position;
+        }
+
         string platformTag = objectPoolerManager.GetRandomPlatformTag();
 
-        latestPlatform = objectPoolerManager.SpawnFromPool(platformTag, spwanTransform.position, Quaternion.identity);
+        latestPlatform = objectPoolerManager.SpawnFromPool(platformTag, GetEndPosition(_posA), Quaternion.identity);
         latestPlatformScript = latestPlatform.GetComponent<Platform>();
         latestPlatformScript.tagName = platformTag;
     }
@@ -59,13 +73,10 @@ public class PlatformManager : MonoBehaviour
     {
         Vector3 endPos = Vector3.zero;
 
-        if (platformPrefab != null) 
-        {
-            Bounds prefabBound = platformModelRenderer.bounds;
+        Bounds prefabBound = platformModelRenderer.bounds;
 
-            float halfLength = prefabBound.extents.z;
-            endPos.z = _posA.z + halfLength;
-        }
+        float halfLength = prefabBound.extents.z;
+        endPos.z = _posA.z + halfLength;
 
         return endPos;
     }
