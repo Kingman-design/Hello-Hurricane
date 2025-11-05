@@ -4,6 +4,7 @@ using System.Collections;
 public class PowerUpBase : MonoBehaviour
 {
     public static PowerUpBase instance;
+    public enum powerType { SuperJump, Invincibility }
 
     private void Awake()
     {
@@ -11,17 +12,17 @@ public class PowerUpBase : MonoBehaviour
     }
 
 
-    public void PowerUse(NewMonoBehaviourScript player, int powerType, float duration = 5f)
+    public void PowerUse(NewMonoBehaviourScript player, powerType Type, float duration = 5f)
     {
         
 
-        switch (powerType)
+        switch (Type)
         {
-            case 1:
-                //Power high jump
-                StartCoroutine(HighJump(player, duration));
+            case powerType.SuperJump:
+                //Power Super Jump
+                StartCoroutine(SuperJump(player, duration));
                 break;
-            case 2:
+            case powerType.Invincibility:
                 //Power invincibility
                 break;
         }
@@ -29,7 +30,7 @@ public class PowerUpBase : MonoBehaviour
     }
 
 
-    IEnumerator HighJump(NewMonoBehaviourScript player, float duration)
+    IEnumerator SuperJump(NewMonoBehaviourScript player, float duration)
     {
         int oldStat = player.GetJumpSpeed();
         player.SetJumpSpeed(oldStat * 2);
