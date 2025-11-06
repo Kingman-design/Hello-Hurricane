@@ -20,6 +20,8 @@ public class PlatformManager : MonoBehaviour
     Platform latestPlatformScript;
 
     ObjectPoolerManager objectPoolerManager;
+
+    bool hasInitialSpawned = false;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -29,20 +31,29 @@ public class PlatformManager : MonoBehaviour
         }
 
         Instance = this;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
         objectPoolerManager = ObjectPoolerManager.Instance;
 
-        for (int i = 0; i < initialPlatformsToSpwan; i++) 
-        {
-            SpawnNextPlatform();
-        }
+        
     }
 
     private void Update()
     {
+        if (!hasInitialSpawned) 
+        {
+            for (int i = 0; i < initialPlatformsToSpwan; i++)
+            {
+                SpawnNextPlatform();
+            }
+
+            hasInitialSpawned = true;
+        }
+
         speed += speedIncreaseRate * Time.deltaTime;
     }
 
