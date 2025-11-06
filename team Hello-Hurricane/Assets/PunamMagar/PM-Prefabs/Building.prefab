@@ -167,5 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd6ff6276629484980fd2cc18fc0cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingType: 0
+  backgroundSpeedFactor: 1
   tagName: 
   buildingRenderer: {fileID: 1859480206115517067}
