@@ -179,10 +179,6 @@ PrefabInstance:
       propertyPath: platformPrefab
       value: 
       objectReference: {fileID: 5175872285336961332, guid: 03ac9159632209e4b88f6f3e3acd0970, type: 3}
-    - target: {fileID: 6476591786218528817, guid: def852aaee258b84cba70ea7efea9514, type: 3}
-      propertyPath: spwanTransform
-      value: 
-      objectReference: {fileID: 1326188381}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -664,11 +660,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 788770038}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1326188381 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7703462557147513381, guid: def852aaee258b84cba70ea7efea9514, type: 3}
-  m_PrefabInstance: {fileID: 382790883}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1403394089
 PrefabInstance:
   m_ObjectHideFlags: 0
