@@ -13,6 +13,7 @@ TagManager:
   - PlatformSpwanTrigger
   - DestroyPlatform
   - DestroyBuilding
+  - DestroyObstacle
   layers:
   - Default
   - TransparentFX
