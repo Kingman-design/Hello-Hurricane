@@ -31,6 +31,8 @@ public class PlatformManager : MonoBehaviour
         }
 
         Instance = this;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
