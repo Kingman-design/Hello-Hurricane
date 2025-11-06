@@ -174,7 +174,11 @@ PrefabInstance:
     - target: {fileID: 6476591786218528817, guid: def852aaee258b84cba70ea7efea9514, type: 3}
       propertyPath: latestPlatform
       value: 
-      objectReference: {fileID: 1925790155}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6476591786218528817, guid: def852aaee258b84cba70ea7efea9514, type: 3}
+      propertyPath: platformPrefab
+      value: 
+      objectReference: {fileID: 5175872285336961332, guid: 03ac9159632209e4b88f6f3e3acd0970, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -377,6 +381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modelRenderer: {fileID: 1166047910}
   moveSpeed: 10
+  tagName: 
 --- !u!4 &788770038
 Transform:
   m_ObjectHideFlags: 0
@@ -919,11 +924,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 20, y: 20, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1925790155 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5175872285336961332, guid: 03ac9159632209e4b88f6f3e3acd0970, type: 3}
-  m_PrefabInstance: {fileID: 1059814088}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1941183405
 PrefabInstance:
   m_ObjectHideFlags: 0

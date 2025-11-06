@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6301513155435238737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3007497699969728808}
+  - component: {fileID: 682678710856925512}
+  m_Layer: 0
+  m_Name: ObjectPoolerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3007497699969728808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6301513155435238737}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &682678710856925512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6301513155435238737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d594651394521143ba5aeb094d2d374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useObstacles: 0
+  buildings:
+  - tag: Building-A
+    prefab: {fileID: 4797302324999418680, guid: cd3986f850f1b614d9da6be43421b0ec, type: 3}
+    size: 50
+  - tag: Building-B
+    prefab: {fileID: 445262059569483639, guid: 66f7d93678c21b642b76676eb5482af4, type: 3}
+    size: 50
+  - tag: Building-C
+    prefab: {fileID: 6063086384846643527, guid: a1aebd718afc760478be00063a98bf31, type: 3}
+    size: 50
+  - tag: Building-D
+    prefab: {fileID: 844648153792085448, guid: ab38f905af2248f4faa550388fe34ed2, type: 3}
+    size: 50
+  buildingsBG:
+  - tag: BG_Building-A
+    prefab: {fileID: 7992833814653815069, guid: 77c009ea0391a3a46806d2db0c7f2aac, type: 3}
+    size: 50
+  - tag: BG_Building-B
+    prefab: {fileID: 6272723240295738700, guid: 66206d0cf7ac3004aae798817e40fdb6, type: 3}
+    size: 50
+  - tag: BG_Building-C
+    prefab: {fileID: 7302429149003506113, guid: 0045e5d215b123049b0674d0370e18fe, type: 3}
+    size: 50
+  platforms:
+  - tag: Platform-A
+    prefab: {fileID: 5175872285336961332, guid: 03ac9159632209e4b88f6f3e3acd0970, type: 3}
+    size: 7
+  obstacles:
+  - tag: Obstacle-A
+    prefab: {fileID: 6432469756154455167, guid: 52a899d64e1a83344aded9795aed2351, type: 3}
+    size: 100
+  - tag: Obstacle-B
+    prefab: {fileID: 7806534958602668524, guid: 40a46f5482642204ba2e6b160d4e22f2, type: 3}
+    size: 100
+  - tag: Obstacle-C
+    prefab: {fileID: 3072118416367943264, guid: d6357d8fda78e314fb33671950e9cdd8, type: 3}
+    size: 100
