@@ -177,7 +177,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 20, y: 20, z: 1}
+  m_Size: {x: 100, y: 100, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6939419816339215177
 MonoBehaviour:
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 3467339844705960714}
   - component: {fileID: 871362078009950324}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Platform
   m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -411,6 +411,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8806354566810802711}
+  - {fileID: 6957836565444134115}
   - {fileID: 2239322485863307016}
   - {fileID: 2357437042952327297}
   - {fileID: 2815025760907110385}
@@ -454,7 +455,106 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelRenderer: {fileID: 1545631520490254108}
+<<<<<<< HEAD:team Hello-Hurricane/Assets/PunamMagar/Prefabs/Floor.prefab
   moveSpeed: 0
+=======
+  moveSpeed: 10
+  tagName: 
+--- !u!1 &5814866179003613169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6957836565444134115}
+  - component: {fileID: 4331358231787929048}
+  - component: {fileID: 1811346911573385008}
+  - component: {fileID: 1265347927479948520}
+  m_Layer: 0
+  m_Name: SpwanTrigger (1)
+  m_TagString: PlatformSpwanTrigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6957836565444134115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5814866179003613169}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2433952384400447683}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4331358231787929048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5814866179003613169}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 100, y: 100, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1811346911573385008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5814866179003613169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 807c5f8dbef159b4f94f0b2cc73b1870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &1265347927479948520
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5814866179003613169}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+>>>>>>> Punam-Dev:team Hello-Hurricane/Assets/PunamMagar/PM-Prefabs/Platform.prefab
 --- !u!1 &6101904947496832920
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +566,7 @@ GameObject:
   - component: {fileID: 2239322485863307016}
   - component: {fileID: 2122582798102278774}
   - component: {fileID: 1545631520490254108}
+  - component: {fileID: 5433976723172078029}
   m_Layer: 0
   m_Name: Model <-- Change this
   m_TagString: Untagged
@@ -519,7 +620,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d5bd2588acbb2e246b02c76593d39159, type: 2}
+  - {fileID: 2100000, guid: f4e4300d326cf5c42bb60931428bba4f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -541,12 +642,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+<<<<<<< HEAD:team Hello-Hurricane/Assets/PunamMagar/Prefabs/Floor.prefab
 --- !u!1 &6482813355435409036
 GameObject:
+=======
+--- !u!64 &5433976723172078029
+MeshCollider:
+>>>>>>> Punam-Dev:team Hello-Hurricane/Assets/PunamMagar/PM-Prefabs/Platform.prefab
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:team Hello-Hurricane/Assets/PunamMagar/Prefabs/Floor.prefab
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2357437042952327297}
@@ -637,3 +744,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4656345662658493426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  m_GameObject: {fileID: 6101904947496832920}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+>>>>>>> Punam-Dev:team Hello-Hurricane/Assets/PunamMagar/PM-Prefabs/Platform.prefab

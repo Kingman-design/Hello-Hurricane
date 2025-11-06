@@ -1,15 +1,13 @@
-using System.Runtime.Serialization;
 using UnityEngine;
 
-public class Building : MonoBehaviour
+public class Obstacle : MonoBehaviour
 {
-    float moveSpeed;
+    [Header("Speed Settings")]
+    [SerializeField] float obstacleSpeed;
+
 
     [HideInInspector]
     public string tagName;
-
-    [SerializeField] Renderer buildingRenderer;
-
     PlatformManager platformManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,27 +19,17 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveSpeed = platformManager.GetSpeed();
+        obstacleSpeed = platformManager.GetSpeed();
         Movement();
     }
 
-    private void LateUpdate()
+    private void Movement()
     {
-        
+        transform.Translate(Vector3.forward * -obstacleSpeed * Time.deltaTime);
     }
 
-    void Movement() 
-    {
-        transform.Translate(Vector3.forward * -moveSpeed * Time.deltaTime);
-    }
-
-    public void ReturnBuilding() 
+    public void ReturnObstacle()
     {
         ObjectPoolerManager.Instance.ReturnToPool(tagName, gameObject);
-    }
-
-    public Renderer GetBuildingRenderer() 
-    {
-        return buildingRenderer;
     }
 }

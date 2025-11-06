@@ -8,7 +8,14 @@ public class BuildingSpwaner : MonoBehaviour
         Left
     }
 
+    public enum BuildingType 
+    {
+        Foreground,
+        Background
+    }
+
     public BuildingSide Side = BuildingSide.Right;
+    public BuildingType Type = BuildingType.Foreground;
 
     [SerializeField] Vector3 buildingOffset;
 
@@ -47,7 +54,16 @@ public class BuildingSpwaner : MonoBehaviour
 
     public void SpwanBuilding() 
     {
-        string randTag = objectPoolerManager.GetRandomBuildingTag();
+        string randTag = "";
+        if (Type == BuildingType.Foreground)
+        {
+            randTag = objectPoolerManager.GetRandomBuildingTag();
+        }
+        else if (Type == BuildingType.Background) 
+        {
+            randTag = objectPoolerManager.GetRandomBGBuildingTag();
+        }
+            
 
         currBuilding = objectPoolerManager.SpawnFromPool(randTag, transform.position, Quaternion.identity);
         currBuilding.GetComponentInParent<Transform>().parent = transform;
