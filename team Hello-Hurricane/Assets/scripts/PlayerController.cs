@@ -27,14 +27,15 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (transform.localScale.y == 0.5f)
+        if (controller.height == 1)
         {
             gravity = 1000;
             timer += Time.deltaTime;
             if (timer >= targettime)
             {
                 transform.localScale = new Vector3(1, 1, 1);
-                //controller.height = 2;
+                Debug.Log(controller.height);
+                controller.height = 2;
                 timer = 0;
                 gravity = oldgravity;
             }
@@ -74,7 +75,8 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Crouch"))
         {
             transform.localScale = new Vector3(1, 0.5f, 1);
-            //controller.height = 1;
+            Debug.Log(controller.height);
+            controller.height = 1;
         }
     }
 
