@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Audio : MonoBehaviour
@@ -38,6 +39,59 @@ public class Audio : MonoBehaviour
         incPitchOverTime();
 
     }
+    void hdlrRun()
+    {
+        bool moving = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D);
+
+        if (moving && controller.isGrounded)
+        {
+            if (!runAudio.isPlaying)
+            {
+                runAudio.loop = true;
+                runAudio.Play();
+            }
+        }
+        else
+        {
+            if (runAudio.isPlaying)
+                runAudio.Stop();
+        }
+    }
+    private void hdlrJump()
+    {
+        if (Input.GetButtonDown("Jump") && controller.isGrounded)
+        {
+            jumpAudio.Play();
+        }
+    }
+    private void hdlrLand()
+    {
+        if (!wasGroundLastF && controller.isGrounded)
+        {
+            landAudio.Play();
+        }
+
+        wasGroundLastF = controller.isGrounded;
+    }
+    private void hdlrDuck()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            duckAudio.Play();
+        }
+    }
+
+    private void incPitchOverTime()
+    {
+        
+    }
+
+
+
+
+
+
+
 
 
 }
