@@ -34,6 +34,7 @@ public class EnemyAi : MonoBehaviour
         Debug.Log(OrigSize);
         
         rb.freezeRotation = true;
+
     }
 
     // Update is called once per frame
