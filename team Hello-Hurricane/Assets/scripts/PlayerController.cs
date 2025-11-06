@@ -16,12 +16,12 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 
     int jumpCount;
     float timer = 0;
-    int oldgravity = 0;
+    int oldgravity;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        oldgravity = gravity;
     }
 
     // Update is called once per frame
@@ -29,15 +29,12 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     {
         if (transform.localScale.y == 0.5f)
         {
-            if (gravity < 50)
-            {
-               oldgravity = gravity;
-            }
             gravity = 1000;
             timer += Time.deltaTime;
             if (timer >= targettime)
             {
                 transform.localScale = new Vector3(1, 1, 1);
+                //controller.height = 2;
                 timer = 0;
                 gravity = oldgravity;
             }
@@ -77,7 +74,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Crouch"))
         {
             transform.localScale = new Vector3(1, 0.5f, 1);
-            transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y - 1, transform.localPosition.z);
+            //controller.height = 1;
         }
     }
 
