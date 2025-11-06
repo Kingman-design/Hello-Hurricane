@@ -1,16 +1,24 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class PowerUpBase : MonoBehaviour
 {
     public static PowerUpBase instance;
-    public enum powerType { SuperJump, Invincibility }
+
+
+    [SerializeField] Renderer model;
+    Color colorOrigin;
+
+    public enum powerType { SuperJump, Invincibility, Explosion }
 
     private void Awake()
     {
         instance = this;
+        colorOrigin = model.material.color;
     }
 
+    
 
     public void PowerUse(NewMonoBehaviourScript player, powerType Type, float duration = 5f)
     {
@@ -24,6 +32,10 @@ public class PowerUpBase : MonoBehaviour
                 break;
             case powerType.Invincibility:
                 //Power invincibility
+                StartCoroutine(PowerInvincibility(player, duration));
+                break;
+            case powerType.Explosion:
+                //Power Explosion
                 break;
         }
 
@@ -34,17 +46,20 @@ public class PowerUpBase : MonoBehaviour
     {
         int oldStat = player.GetJumpSpeed();
         player.SetJumpSpeed(oldStat * 2);
+        
+        model.material.color = Color.green;
         yield return new WaitForSeconds(duration);
         player.SetJumpSpeed(oldStat);
+        model.material.color = colorOrigin;
     }
 
 
-
-
-
-
-
-
+    IEnumerator PowerInvincibility(NewMonoBehaviourScript player, float duration)
+    {
+        model.material.color = Color.blue;
+        yield return new WaitForSeconds(duration);
+        model.material.color = colorOrigin;
+    }
 
 
 }
