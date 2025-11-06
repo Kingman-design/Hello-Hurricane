@@ -17,25 +17,24 @@ public class ObstacleSpwaner : MonoBehaviour
         
     }
 
-    public void Spwan(bool _diffObstacle = false, string _lastTag = null)
+    public void Spwan()
+    {
+        string tag = objectPoolerManager.GetRandomObstacleTag(); ;
+        
+        GameObject obstacle = objectPoolerManager.SpawnFromPool(tag, transform.position, Quaternion.identity);
+        obstacle.GetComponent<Obstacle>().tagName = tag;
+        lastObstacleTag = tag;
+    }
+
+    public void SpwanDifferentThenLast(string _lastTag) 
     {
         string tag;
-        if (_diffObstacle == false)
+
+        do
         {
             tag = objectPoolerManager.GetRandomObstacleTag();
-        }
-        else
-        {
-            while (true)
-            {
-                tag = objectPoolerManager.GetRandomObstacleTag();
-                if (tag != _lastTag)
-                {
 
-                    break;
-                }
-            }
-        }
+        } while (tag != _lastTag);
 
         GameObject obstacle = objectPoolerManager.SpawnFromPool(tag, transform.position, Quaternion.identity);
         obstacle.GetComponent<Obstacle>().tagName = tag;

@@ -23,6 +23,7 @@ public class ObstacleManager : MonoBehaviour
     [SerializeField] private List<GameObject> lanes;
 
     //[Header("")]
+    ObjectPoolerManager poolerManager;
 
     private bool hasInitialSpwaned = false;
 
@@ -43,7 +44,7 @@ public class ObstacleManager : MonoBehaviour
     {
         //randSpwanTime = Random.Range(spawnInterval.min, spawnInterval.max);
 
-        
+        poolerManager = ObjectPoolerManager.Instance;
     }
 
     // Update is called once per frame
@@ -54,10 +55,18 @@ public class ObstacleManager : MonoBehaviour
             for (int i = 0; i < initialSpwan; i++)
             {
                 SpwanObstacle();
-                spwanParent.position += Vector3.forward * spwanDistance;
+
+                if (poolerManager.useObstacles) 
+                {
+                    spwanParent.position += Vector3.forward * spwanDistance;
+                }
             }
 
-            spwanParent.position -= Vector3.forward * spwanDistance;
+            if (poolerManager.useObstacles)
+            {
+                spwanParent.position -= Vector3.forward * spwanDistance;
+            }
+            
             hasInitialSpwaned = true;
         }
     }

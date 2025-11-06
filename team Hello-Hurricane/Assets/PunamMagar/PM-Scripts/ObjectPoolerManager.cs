@@ -8,7 +8,7 @@ public class ObjectPoolerManager : MonoBehaviour
     public static ObjectPoolerManager Instance;
 
     [System.Serializable]
-    public class Pool 
+    public class Pool
     {
         public string tag;
         public GameObject prefab;
@@ -16,7 +16,7 @@ public class ObjectPoolerManager : MonoBehaviour
     }
 
     [Header("Settings")]
-    [SerializeField] bool useObstacles = false;
+    public bool useObstacles = false;
 
     [SerializeField] List<Pool> buildings;
     [SerializeField] List<Pool> buildingsBG;
@@ -44,61 +44,27 @@ public class ObjectPoolerManager : MonoBehaviour
 
         foreach (Pool building in buildings) 
         {
-            Queue<GameObject> buildingPool = new Queue<GameObject>();
-
-            for (int i = 0; i < building.size; i++) 
-            {
-                GameObject obj = Instantiate(building.prefab);
-                obj.SetActive(false);
-                buildingPool.Enqueue(obj);
-            }
-
-            poolDictionary.Add(building.tag, buildingPool);
+            AddToDictionary(building);
         }
 
         //For Background Buildings
         foreach (Pool building in buildingsBG) 
         {
-            Queue<GameObject> buildingPool = new Queue<GameObject>();
-
-            for (int i = 0; i < building.size; i++)
-            {
-                GameObject obj = Instantiate(building.prefab);
-                obj.SetActive(false);
-                buildingPool.Enqueue(obj);
-            }
-
-            poolDictionary.Add(building.tag, buildingPool);
+            AddToDictionary(building);
         }
 
         //For Platforms
         foreach (Pool platform in platforms) 
         {
-            Queue<GameObject> platformPool = new Queue<GameObject>();
-
-            for (int i = 0; i < platform.size; i++)
-            {
-                GameObject obj = Instantiate(platform.prefab);
-                obj.SetActive(false);
-                platformPool.Enqueue(obj);
-            }
-
-            poolDictionary.Add(platform.tag, platformPool);
+            AddToDictionary(platform);
         }
 
         //For Obstacles
-        if (useObstacles && obstacles != null)
+        if (useObstacles && obstacles.Count != 0)
         {
             foreach (Pool obstacle in obstacles)
             {
-                Queue<GameObject> obstaclePool = new Queue<GameObject>();
-                for (int i = 0; i < obstacle.size; i++)
-                {
-                    GameObject obj = Instantiate(obstacle.prefab);
-                    obj.SetActive(false);
-                    obstaclePool.Enqueue(obj);
-                }
-                poolDictionary.Add(obstacle.tag, obstaclePool);
+                AddToDictionary(obstacle);
             }
         }
     }
@@ -167,5 +133,18 @@ public class ObjectPoolerManager : MonoBehaviour
     {
         obj.SetActive(false);
         poolDictionary[tag].Enqueue(obj);
+    }
+
+    void AddToDictionary(Pool _object) 
+    {
+        Queue<GameObject> objPool = new Queue<GameObject>();
+        for (int i = 0; i < _object.size; i++)
+        {
+            GameObject obj = Instantiate(_object.prefab);
+            obj.SetActive(false);
+            objPool.Enqueue(obj);
+        }
+
+        poolDictionary.Add(_object.tag, objPool);
     }
 }
