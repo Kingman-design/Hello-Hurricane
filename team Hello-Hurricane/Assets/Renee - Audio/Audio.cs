@@ -12,6 +12,7 @@ public class Audio : MonoBehaviour
 
     [SerializeField] float pitchRate = 0.05f;
     [SerializeField] float maxPitch = 2.5f;
+    [SerializeField] float pitchSpeedUp = 0.2f;
 
     bool wasGroundLastF; 
     float bAudioPitch;
@@ -36,7 +37,7 @@ public class Audio : MonoBehaviour
         hdlrJump();
         hdlrLand();
         hdlrDuck();
-        incPitchOverTime();
+        updatePitch();
 
     }
     void hdlrRun()
@@ -81,12 +82,13 @@ public class Audio : MonoBehaviour
         }
     }
 
-    private void incPitchOverTime()
+    private void updatePitch()
     {
-        
+        float targetPitch = Mathf.Clamp(bAudioPitch + (playerSpeed * 0.02f), bAudioPitch, maxPitch);
     }
 
-
+    // note: bg music needs loop and play on awake, run audio is looped, jump/land/duck have neither.
+    // note: adjust pitch as needed
 
 
 
