@@ -89,6 +89,7 @@ public class Audio : MonoBehaviour
 
     // note: bg music needs loop and play on awake, run audio is looped, jump/land/duck have neither.
     // note: adjust pitch as needed
+    // ps: revision needed
 
 
 
