@@ -19,7 +19,6 @@ public class buttonFunction : MonoBehaviour
 
     public void onEasy()
     {
-        gameManager.instance.stateUnpause(); 
         SceneManager.LoadScene("Prototype");
         
     }
@@ -42,15 +41,16 @@ public class buttonFunction : MonoBehaviour
         gameManager.instance.stateUnpause();
     }
 
-    public void onRestart()
+    public void onRestart()     //i know this is not great but i'm tired
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameManager.instance.stateUnpause();
     }
 
-    public void onTitle()
-    {
-        SceneManager.LoadScene("Kathryn-Scene");
-    }
+    //public void onTitle()
+    //{
+    //    SceneManager.LoadScene("Kathryn-Scene");
+    //}
 
 
     //public void loadLevel(int lvl)
