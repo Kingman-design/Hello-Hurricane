@@ -15,6 +15,9 @@ public class ObjectPoolerManager : MonoBehaviour
         public int size;
     }
 
+    [Header("Settings")]
+    [SerializeField] bool useObstacles = false;
+
     [SerializeField] List<Pool> buildings;
     [SerializeField] List<Pool> buildingsBG;
     [SerializeField] List<Pool> platforms;
@@ -82,16 +85,19 @@ public class ObjectPoolerManager : MonoBehaviour
         }
 
         //For Obstacles
-        foreach (Pool obstacle in obstacles)
+        if (useObstacles && obstacles != null)
         {
-            Queue<GameObject> obstaclePool = new Queue<GameObject>();
-            for (int i = 0; i < obstacle.size; i++)
+            foreach (Pool obstacle in obstacles)
             {
-                GameObject obj = Instantiate(obstacle.prefab);
-                obj.SetActive(false);
-                obstaclePool.Enqueue(obj);
+                Queue<GameObject> obstaclePool = new Queue<GameObject>();
+                for (int i = 0; i < obstacle.size; i++)
+                {
+                    GameObject obj = Instantiate(obstacle.prefab);
+                    obj.SetActive(false);
+                    obstaclePool.Enqueue(obj);
+                }
+                poolDictionary.Add(obstacle.tag, obstaclePool);
             }
-            poolDictionary.Add(obstacle.tag, obstaclePool);
         }
     }
 
@@ -143,6 +149,16 @@ public class ObjectPoolerManager : MonoBehaviour
     {
         int randomIndex = Random.Range(0, obstacles.Count);
         return obstacles[randomIndex].tag;
+    }
+
+    public List<string> GetAllObstacleTags() 
+    {
+        List<string> obstacleTags = new List<string>();
+        foreach (Pool obstacle in obstacles) 
+        {
+            obstacleTags.Add(obstacle.tag);
+        }
+        return obstacleTags;
     }
 
     public void ReturnToPool(string tag, GameObject obj)

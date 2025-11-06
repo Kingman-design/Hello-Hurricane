@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ObstacleManager : MonoBehaviour
 {
+    public static ObstacleManager Instance;
+
     [System.Serializable]
     public struct MinMax 
     {
@@ -11,28 +13,52 @@ public class ObstacleManager : MonoBehaviour
     }
 
     [Header("Spwan Settings")]
+    [SerializeField] int initialSpwan = 10;
+    [SerializeField] int minLanesToSpwan = 1;
+
+    [SerializeField] float spwanDistance = 50f;
+
+    [SerializeField] Transform spwanParent;
+
     [SerializeField] private List<GameObject> lanes;
 
-    [SerializeField] MinMax spawnInterval;
-    private float spwanTimer = 0f;
-    private float randSpwanTime = 0f;
+    //[Header("")]
 
+    private bool hasInitialSpwaned = false;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        randSpwanTime = Random.Range(spawnInterval.min, spawnInterval.max);
+        //randSpwanTime = Random.Range(spawnInterval.min, spawnInterval.max);
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        spwanTimer += Time.deltaTime;
-
-        if (spwanTimer >= randSpwanTime) 
+        if (!hasInitialSpwaned) 
         {
-            SpwanObstacle();
-            spwanTimer = 0f;
+            for (int i = 0; i < initialSpwan; i++)
+            {
+                SpwanObstacle();
+                spwanParent.position += Vector3.forward * spwanDistance;
+            }
+
+            spwanParent.position -= Vector3.forward * spwanDistance;
+            hasInitialSpwaned = true;
         }
     }
 
@@ -47,17 +73,17 @@ public class ObstacleManager : MonoBehaviour
         }
     }
 
-    void SpwanObstacle()
+    public void SpwanObstacle()
     {
         ShuffleLanes(lanes);
 
-        int lanesToUse = Random.Range(1, lanes.Count + 1);
+        int lanesToUse = Random.Range(minLanesToSpwan, lanes.Count + 1);
 
         for (int i = 0; i < lanesToUse; i++)
         {
-            lanes[i].GetComponent<ObstacleSpwaner>().Spwan();
-        }
+            ObstacleSpwaner currSpawner = lanes[i].GetComponent<ObstacleSpwaner>();
 
-        randSpwanTime = Random.Range(spawnInterval.min, spawnInterval.max);
+            currSpawner.Spwan();
+        }
     }
 }

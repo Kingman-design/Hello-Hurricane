@@ -7,13 +7,11 @@ public class ObstacleTrigger : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // When the building enters the trigger, return the obstacle to the pool
-        if (other.CompareTag("DestroyBuilding"))
+        if (other.CompareTag("DestroyObstacle"))
         {
             obstacle.ReturnObstacle();
 
-            //GameObject parentObj = transform.parent.gameObject;
-            //ObstacleSpwaner obstacleSpwaner = parentObj.GetComponentInParent<ObstacleSpwaner>();
-            //obstacleSpwaner.Spwan();
+            ObstacleManager.Instance.SpwanObstacle();
         }
     }
 }

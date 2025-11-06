@@ -3,6 +3,8 @@ using UnityEngine;
 public class ObstacleSpwaner : MonoBehaviour
 {
     ObjectPoolerManager objectPoolerManager;
+
+    string lastObstacleTag = "";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,11 +17,33 @@ public class ObstacleSpwaner : MonoBehaviour
         
     }
 
-    public void Spwan()
+    public void Spwan(bool _diffObstacle = false, string _lastTag = null)
     {
-        string randTag = objectPoolerManager.GetRandomObstacleTag();
-        GameObject obstacle = objectPoolerManager.SpawnFromPool(randTag, transform.position, Quaternion.identity);
-        obstacle.GetComponentInParent<Transform>().parent = transform;
-        obstacle.GetComponent<Obstacle>().tagName = randTag;
+        string tag;
+        if (_diffObstacle == false)
+        {
+            tag = objectPoolerManager.GetRandomObstacleTag();
+        }
+        else
+        {
+            while (true)
+            {
+                tag = objectPoolerManager.GetRandomObstacleTag();
+                if (tag != _lastTag)
+                {
+
+                    break;
+                }
+            }
+        }
+
+        GameObject obstacle = objectPoolerManager.SpawnFromPool(tag, transform.position, Quaternion.identity);
+        obstacle.GetComponent<Obstacle>().tagName = tag;
+        lastObstacleTag = tag;
+    }
+
+    public string GetLastObstacleTag()
+    {
+        return lastObstacleTag;
     }
 }
