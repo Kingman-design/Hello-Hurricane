@@ -4,10 +4,16 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Enemy
+  - Player-MisealTest
+  - Duck-MGTest
+  - Dodge-MGTest
+  - JumpMG
   - Platform
   - PlatformSpwanTrigger
   - DestroyPlatform
   - DestroyBuilding
+  - DestroyObstacle
   layers:
   - Default
   - TransparentFX
