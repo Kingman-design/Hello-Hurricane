@@ -14,6 +14,11 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     Vector3 moveDir;
     Vector3 playerVel;
 
+    bool isSliding;
+    Vector3 slideDirection;
+    float slideSpeed;
+    float slideDuration;
+
     int jumpCount;
     float timer = 0;
     int oldgravity;
@@ -39,7 +44,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
                 gravity = oldgravity;
             }
         }
-        movement();  
+        movement();
     }
 
     void movement()
@@ -52,6 +57,18 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         else
         {
             playerVel.y -= gravity * Time.deltaTime;
+        }
+
+        if (isSliding)
+        {
+            controller.Move(slideDirection * slideSpeed * Time.deltaTime);
+            slideDuration -= Time.deltaTime;
+
+            if (slideDuration <= 0)
+            {
+                isSliding = false;
+            }
+
         }
 
         moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
@@ -86,6 +103,14 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         {
             //you lose screen here
         }
+    }
+
+    public void StartSlide(Vector3 dir, float duration, float speed)
+    {
+        isSliding = true;
+        slideDirection = dir.normalized;
+        slideDuration = duration;
+        slideSpeed = speed;
     }
 
     public int GetSpeed()

@@ -2,11 +2,25 @@ using UnityEngine;
 
 public class Traps : MonoBehaviour
 {
+    
+    enum traptypes
+    {
+        propane,
+        puddle,
+        wires
+    }
+
+    [SerializeField] traptypes type;
 
     [SerializeField] int damagetank;
 
-    bool ispuddleactive;
-    bool iswiresactive;
+    bool isSliding;
+    [SerializeField] Vector3 slideDirection;
+    [SerializeField] float slideSpeed;
+    [SerializeField] float slideDuration;
+
+
+    bool isElectrized;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,14 +40,30 @@ public class Traps : MonoBehaviour
             return;
 
         IDamage dmg = other.GetComponent<IDamage>();
+        
+        
 
-        if (dmg != null)
+
+        if (dmg != null && other.CompareTag("Player"))
         {
-            if(other.CompareTag("Player"))
+            if(type == traptypes.propane)
             {
                 dmg.takeDamage(damagetank);
             }
 
+            if (type == traptypes.puddle)
+            {
+                Debug.Log("slides starts");
+                NewMonoBehaviourScript player = other.GetComponent<NewMonoBehaviourScript>();
+                if (player != null)
+                {
+                    Debug.Log("Player slides start");
+                    player.StartSlide(slideDirection, slideDuration, slideSpeed);
+                    Debug.Log("Player slides ends");
+                }
+
+                Debug.Log("slides ends");
+            }
 
             Destroy(gameObject);
         }
