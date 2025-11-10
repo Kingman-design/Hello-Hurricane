@@ -42,7 +42,7 @@ public class ObjectPoolerManager : MonoBehaviour
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
-        foreach (Pool building in buildings) 
+        foreach (Pool building in buildings)
         {
             AddToDictionary(building);
         }

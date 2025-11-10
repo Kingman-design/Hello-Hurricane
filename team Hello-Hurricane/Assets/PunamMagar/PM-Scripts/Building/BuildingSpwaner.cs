@@ -23,33 +23,38 @@ public class BuildingSpwaner : MonoBehaviour
 
     ObjectPoolerManager objectPoolerManager;
     PlatformManager platformManager;
+    BuildingManager buildingManager;
 
     GameObject latestBuilding = null;
     GameObject currBuilding;
     Building currBuildingScript;
 
-    bool hasMaxSpwaned = false;
+    //bool hasMaxSpwaned = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         objectPoolerManager = ObjectPoolerManager.Instance;
         platformManager = PlatformManager.Instance;
+        buildingManager = BuildingManager.Instance;
 
         //transform.position = platformManager.latestPlatform.transform.position;
+    }
+
+    private void OnEnable()
+    {
+        PlatformManager.OnPlatformSpawned += SpwanInitialPlatforms;
+    }
+
+    private void OnDisable()
+    {
+        PlatformManager.OnPlatformSpawned -= SpwanInitialPlatforms;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (hasMaxSpwaned == false) 
-        {
-            for (int i = 0; i < maxNumOfBuildings; i++)
-            {
-                SpwanBuilding();
-            }
-            hasMaxSpwaned = true;
-        }
+        
     }
 
     public void SpwanBuilding() 
@@ -77,11 +82,11 @@ public class BuildingSpwaner : MonoBehaviour
         {
             if (Side == BuildingSide.Left)
             {
-                finalPos = BuildingManager.Instance.GetFinalPosition(currBuilding, buildingOffset, true);
+                finalPos = buildingManager.GetFinalPosition(currBuilding, buildingOffset, true);
             }
             else if (Side == BuildingSide.Right)
             {
-                finalPos = BuildingManager.Instance.GetFinalPosition(currBuilding, buildingOffset);
+                finalPos = buildingManager.GetFinalPosition(currBuilding, buildingOffset);
             }
             currBuilding.transform.position = finalPos;
 
@@ -91,15 +96,31 @@ public class BuildingSpwaner : MonoBehaviour
 
         if (Side == BuildingSide.Left)
         {
-            finalPos = BuildingManager.Instance.GetFinalPosition(currBuilding, latestBuilding, buildingOffset, true);
+            finalPos = buildingManager.GetFinalPosition(currBuilding, latestBuilding, buildingOffset, true);
         }
         else if (Side == BuildingSide.Right)
         {
-            finalPos = BuildingManager.Instance.GetFinalPosition(currBuilding, latestBuilding, buildingOffset);
+            finalPos = buildingManager.GetFinalPosition(currBuilding, latestBuilding, buildingOffset);
         }
 
         currBuilding.transform.position = finalPos;
 
         latestBuilding = currBuilding;
+    }
+
+    void SpwanInitialPlatforms() 
+    {
+
+        for (int i = 0; i < maxNumOfBuildings; i++)
+        {
+            SpwanBuilding();
+        }
+
+
+        //if (hasMaxSpwaned == false)
+        //{
+            
+        //    hasMaxSpwaned = true;
+        //}
     }
 }

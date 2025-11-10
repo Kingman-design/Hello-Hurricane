@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PlatformManager : MonoBehaviour
 {
     public static PlatformManager Instance;
+
+    public static event Action OnPlatformSpawned;
 
     [SerializeField] private GameObject platformPrefab;
     public GameObject latestPlatform;
@@ -38,8 +41,6 @@ public class PlatformManager : MonoBehaviour
     private void Start()
     {
         objectPoolerManager = ObjectPoolerManager.Instance;
-
-        
     }
 
     private void Update()
@@ -52,6 +53,7 @@ public class PlatformManager : MonoBehaviour
             }
 
             hasInitialSpawned = true;
+            OnPlatformSpawned?.Invoke();
         }
 
         speed += speedIncreaseRate * Time.deltaTime;
