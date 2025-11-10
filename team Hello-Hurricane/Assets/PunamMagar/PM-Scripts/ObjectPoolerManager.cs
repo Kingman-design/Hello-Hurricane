@@ -22,6 +22,7 @@ public class ObjectPoolerManager : MonoBehaviour
     [SerializeField] List<Pool> buildingsBG;
     [SerializeField] List<Pool> platforms;
     [SerializeField] List<Pool> obstacles;
+    [SerializeField] List<Pool> nextObstacleTriggers;
 
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
@@ -65,6 +66,12 @@ public class ObjectPoolerManager : MonoBehaviour
             foreach (Pool obstacle in obstacles)
             {
                 AddToDictionary(obstacle);
+            }
+
+            //For Next Obstacle Triggers
+            foreach (Pool nextObstacleTrigger in nextObstacleTriggers)
+            {
+                AddToDictionary(nextObstacleTrigger);
             }
         }
     }
@@ -117,6 +124,12 @@ public class ObjectPoolerManager : MonoBehaviour
     {
         int randomIndex = Random.Range(0, obstacles.Count);
         return obstacles[randomIndex].tag;
+    }
+
+    public string GetNextObstacleTriggerTag() 
+    {
+        int randomIndex = Random.Range(0, nextObstacleTriggers.Count);
+        return nextObstacleTriggers[randomIndex].tag;
     }
 
     public List<string> GetAllObstacleTags() 
