@@ -427,9 +427,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 223999441678342134, guid: 324646f940863e642a70be0d6580a972, type: 3}
+      propertyPath: buildingOffset.x
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7025762798415235187, guid: 324646f940863e642a70be0d6580a972, type: 3}
       propertyPath: m_Name
       value: BuildingManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7729913909213183951, guid: 324646f940863e642a70be0d6580a972, type: 3}
+      propertyPath: buildingOffset.x
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 8838400059083760455, guid: 324646f940863e642a70be0d6580a972, type: 3}
       propertyPath: m_LocalPosition.x
