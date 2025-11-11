@@ -87,7 +87,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            gameManager.instance.stateLose();
+            UIManager.instance.stateLose();
         }
     }
 
