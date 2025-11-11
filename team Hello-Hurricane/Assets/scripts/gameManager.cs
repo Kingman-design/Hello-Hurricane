@@ -13,4 +13,11 @@ public class gameManager : MonoBehaviour
     {
         
     }
+
+    // changes for the difficutly of the game
+    void GameDifficulty()
+    {
+
+    }
+
 }
