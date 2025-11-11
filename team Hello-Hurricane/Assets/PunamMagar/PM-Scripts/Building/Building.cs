@@ -25,6 +25,9 @@ public class Building : MonoBehaviour
 
     PlatformManager platformManager;
 
+    [HideInInspector]
+    public BuildingSpwaner buildingSpwaner;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

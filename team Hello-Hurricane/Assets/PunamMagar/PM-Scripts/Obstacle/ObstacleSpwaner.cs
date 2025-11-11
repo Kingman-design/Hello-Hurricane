@@ -19,6 +19,11 @@ public class ObstacleSpwaner : MonoBehaviour
 
     public void Spwan()
     {
+        if (objectPoolerManager == null)
+        {
+            objectPoolerManager = ObjectPoolerManager.Instance;
+        }
+
         string tag = objectPoolerManager.GetRandomObstacleTag();
         GameObject obstacle = objectPoolerManager.SpawnFromPool(tag, transform.position, Quaternion.identity);
 
@@ -29,6 +34,11 @@ public class ObstacleSpwaner : MonoBehaviour
     public void SpwanDifferentThenLast(string _lastTag) 
     {
         string tag;
+
+        if (objectPoolerManager == null)
+        {
+            objectPoolerManager = ObjectPoolerManager.Instance;
+        }
 
         do
         {
@@ -49,6 +59,11 @@ public class ObstacleSpwaner : MonoBehaviour
 
     public void SpwanNextObstacleTrigger() 
     {
+        if (objectPoolerManager == null) 
+        {
+            objectPoolerManager = ObjectPoolerManager.Instance;
+        }
+
         string triggerTag = objectPoolerManager.GetNextObstacleTriggerTag();
         GameObject obstacleTrigger = objectPoolerManager.SpawnFromPool(triggerTag, transform.position, Quaternion.identity);
     }

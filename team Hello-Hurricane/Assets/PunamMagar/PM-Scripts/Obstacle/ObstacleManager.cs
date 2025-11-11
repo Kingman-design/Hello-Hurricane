@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObstacleManager : MonoBehaviour
 {
@@ -25,7 +26,9 @@ public class ObstacleManager : MonoBehaviour
     //[Header("")]
     ObjectPoolerManager poolerManager;
 
-    private bool hasInitialSpwaned = false;
+    //Original Settings
+    //float OriginalSpwanDistance;
+    Vector3 originalSpwanParent;
 
     private void Awake()
     {
@@ -44,25 +47,27 @@ public class ObstacleManager : MonoBehaviour
     {
         poolerManager = ObjectPoolerManager.Instance;
 
-        gameObject.SetActive(poolerManager.useObstacles);
+        gameObject.SetActive(poolerManager.usePunamObstacles);
+
+        originalSpwanParent = spwanParent.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!hasInitialSpwaned)
-        {
-            for (int i = 0; i < initialSpwan; i++)
-            {
-                spwanParent.position += Vector3.forward * spwanDistance;
+        //if (!hasInitialSpwaned)
+        //{
+        //    for (int i = 0; i < initialSpwan; i++)
+        //    {
+        //        spwanParent.position += Vector3.forward * spwanDistance;
 
-                SpwanObstacle();
-            }
+        //        SpwanObstacle();
+        //    }
 
-            spwanParent.position -= Vector3.forward * spwanDistance * 2;
+        //    spwanParent.position -= Vector3.forward * spwanDistance * 2;
 
-            hasInitialSpwaned = true;
-        }
+        //    hasInitialSpwaned = true;
+        //}
     }
 
     void ShuffleLanes(List<GameObject> _lanes)
@@ -104,5 +109,43 @@ public class ObstacleManager : MonoBehaviour
                 currSpawner.Spwan();
             }
         }
+    }
+
+    void SpwanInitialObstacle() 
+    {
+        if (!ObjectPoolerManager.Instance.usePunamObstacles) 
+        {
+            return;        
+        }
+
+        for (int i = 0; i < initialSpwan; i++)
+        {
+            spwanParent.position += Vector3.forward * spwanDistance;
+            SpwanObstacle();
+        }
+
+        spwanParent.position -= Vector3.forward * spwanDistance * 2;
+    }
+
+    private void OnEnable()
+    {
+        PlatformManager.OnPlatformSpawned += SpwanInitialObstacle;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        PlatformManager.OnPlatformSpawned -= SpwanInitialObstacle;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void ResetSettings()
+    {
+        spwanParent.position = originalSpwanParent;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResetSettings();
     }
 }

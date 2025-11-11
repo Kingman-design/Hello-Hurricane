@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlatformManager : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class PlatformManager : MonoBehaviour
 
     ObjectPoolerManager objectPoolerManager;
 
+    //Original Settings
+    float originalSpeed;
+
     bool hasInitialSpawned = false;
     void Awake()
     {
@@ -41,27 +45,21 @@ public class PlatformManager : MonoBehaviour
     private void Start()
     {
         objectPoolerManager = ObjectPoolerManager.Instance;
+        originalSpeed = speed;
     }
 
     private void Update()
     {
-        if (!hasInitialSpawned) 
-        {
-            for (int i = 0; i < initialPlatformsToSpwan; i++)
-            {
-                SpawnNextPlatform();
-            }
-
-            hasInitialSpawned = true;
-            OnPlatformSpawned?.Invoke();
-        }
-
         speed += speedIncreaseRate * Time.deltaTime;
     }
 
     public void SpawnNextPlatform()
     {
         //latestPlatform = Instantiate(platformPrefab, GetEndPosition(_posA), Quaternion.identity, transform);
+        if (objectPoolerManager == null) 
+        {
+            objectPoolerManager = ObjectPoolerManager.Instance;
+        }
 
         Vector3 _posA;
         if (latestPlatformScript != null)
@@ -102,5 +100,37 @@ public class PlatformManager : MonoBehaviour
     public Renderer GetPlatformRenderer() 
     {
         return platformModelRenderer;
+    }
+
+    void SpwanInitialPlatforms() 
+    {
+        for (int i = 0; i < initialPlatformsToSpwan; i++)
+        {
+            SpawnNextPlatform();
+        }
+
+        OnPlatformSpawned?.Invoke();
+    }
+
+    private void OnEnable()
+    {
+        ObjectPoolerManager.OnDoneAddingToDictionary += SpwanInitialPlatforms;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        ObjectPoolerManager.OnDoneAddingToDictionary -= SpwanInitialPlatforms;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void ResetSettings() 
+    {
+        speed = originalSpeed;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResetSettings();
     }
 }

@@ -71,9 +71,9 @@ public class BuildingSpwaner : MonoBehaviour
             
 
         currBuilding = objectPoolerManager.SpawnFromPool(randTag, transform.position, Quaternion.identity);
-        currBuilding.GetComponentInParent<Transform>().parent = transform;
         currBuildingScript = currBuilding.GetComponent<Building>();
         currBuildingScript.tagName = randTag;
+        currBuildingScript.buildingSpwaner = this;
 
         Vector3 finalPos = Vector3.zero;
 

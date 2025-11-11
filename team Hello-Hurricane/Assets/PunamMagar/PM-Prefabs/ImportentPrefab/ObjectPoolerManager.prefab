@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d594651394521143ba5aeb094d2d374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useObstacles: 0
+  usePunamObstacles: 0
   buildings:
   - tag: Building-A
     prefab: {fileID: 4797302324999418680, guid: cd3986f850f1b614d9da6be43421b0ec, type: 3}
@@ -82,3 +82,7 @@ MonoBehaviour:
   - tag: Obstacle-C
     prefab: {fileID: 3072118416367943264, guid: d6357d8fda78e314fb33671950e9cdd8, type: 3}
     size: 100
+  nextObstacleTriggers:
+  - tag: NextObstacleSpwan
+    prefab: {fileID: 8201137527314220512, guid: 3f376b3d51e2ae34dbc0dc29f8fb327d, type: 3}
+    size: 50
