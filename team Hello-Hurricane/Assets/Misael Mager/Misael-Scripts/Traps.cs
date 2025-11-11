@@ -25,6 +25,7 @@ public class Traps : MonoBehaviour
     bool isElectrized;
     [SerializeField] float wireDuration;
     [SerializeField] float wireInterval;
+    [SerializeField] float FreezeTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -61,14 +62,14 @@ public class Traps : MonoBehaviour
 
                 if (player != null && type == traptypes.puddle) // slide
                 {
-                    Debug.Log("Player slides start");
+                    //Debug.Log("Player slides start");
                     player.StartSlide(slideDirection, slideDuration, slideSpeed);
-                    Debug.Log("Player slides ends");
+                    //Debug.Log("Player slides ends");
                 }
                 else if (type == traptypes.wires && player != null)
                 {
                     //Debug.Log("Wires start");
-                    player.StartWires(wireDuration,wireInterval);
+                    player.StartWires(wireDuration,wireInterval,FreezeTime);
                     //Debug.Log("Wire ends");
                 }
 

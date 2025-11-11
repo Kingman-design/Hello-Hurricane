@@ -15,26 +15,31 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     Vector3 moveDir;
     Vector3 playerVel;
 
+    // Sliding
     bool isSliding;
     Vector3 slideDirection;
     float slideSpeed;
     float slideDuration;
 
+    // Wires
     bool isElectric;
     float wireDuration;
     float wireInterval;
+    float wirecounter;
+    float wiretimer = 0f;
+    float Freezetime;
     int randomElectric;
 
-    
-
+    bool canmove;
     int jumpCount;
-    float timer = 0;
+    float timer = 0f;
     int oldgravity;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         oldgravity = gravity;
+        canmove = true;
     }
 
     // Update is called once per frame
@@ -80,14 +85,22 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         }
         else if (isElectric)
         {
-            if(randomElectric ==  0)
+            Electrified();
+            wiretimer += Time.deltaTime;
+            wirecounter += Time.deltaTime;
+
+            if (randomElectric == 0)
             { 
                 Debug.Log("Zapped");
+                StartCoroutine(freezeplayer());
             }
         }
 
-        moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        controller.Move(moveDir * speed * Time.deltaTime);
+        if (canmove)
+        { 
+            moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
+            controller.Move(moveDir * speed * Time.deltaTime);
+        }
 
         jump();
         crouch();
@@ -128,29 +141,40 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         slideSpeed = speed;
     }
 
-    public void StartWires(float duration, float interval)
+    public void StartWires(float duration, float interval, float freezetime)
     {
         //Debug.Log(wireInterval);
         isElectric = true;
         wireInterval = interval;
         wireDuration = duration;
+        Freezetime = freezetime;
+        wirecounter = 0;
         //Debug.Log(wireInterval);
-        StartCoroutine(Electrified());
     }
 
-    private IEnumerator Electrified()
+    private void Electrified()
     {
-        float timer = 0f;
+
         //Debug.Log("Interval start");
-        while(timer < wireDuration)
+        while(wiretimer <= wireDuration && wirecounter >= wireInterval)
         {
             Debug.Log("Start timer");
-            randomElectric = Random.Range(0, 100);
-            yield return new WaitForSeconds(wireInterval);
+            randomElectric = Random.Range(0, 5);
+            wirecounter = 0;
         }
-        isElectric = false;
+        if (wiretimer > wireDuration)
+        {
+            isElectric = false;
+            wiretimer = 0f;
+        }
     }
 
+    IEnumerator freezeplayer()
+    {
+        canmove = false;
+        yield return new WaitForSeconds(Freezetime);
+        canmove = true;
+    }
 
     public int GetSpeed()
     {
