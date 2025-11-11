@@ -29,7 +29,6 @@ public class BuildingManager : MonoBehaviour
     {
         Vector3 endPos = _currBuilding.transform.position;
         Renderer currBuldRenderer = _currBuilding.GetComponent<Building>().GetBuildingRenderer();
-
         Renderer _lastBuildingRenderer = _lastBuilding.GetComponent<Building>().GetBuildingRenderer();
 
         if (platformRenderer == null) 
@@ -45,7 +44,7 @@ public class BuildingManager : MonoBehaviour
 
             float halfX = currBuildingBound.extents.x + platformBound.extents.x;
 
-            float halfY = currBuildingBound.extents.y - platformBound.extents.y;
+            float halfY = currBuildingBound.extents.y;
 
             float halfZ = lastBuildingBound.extents.z + currBuildingBound.extents.z;
 
@@ -58,16 +57,18 @@ public class BuildingManager : MonoBehaviour
                 endPos.x -= halfX;
             }
                 
-            endPos.y += halfY;
+            //endPos.y += halfY;
 
             float zOffset = 0f;
             zOffset = Random.Range(_offset.z, _offset.z + zOffsetRange);
+
+            endPos.x -= _offset.x;
 
             endPos.z += _lastBuilding.transform.position.z + halfZ + zOffset;
             endPos.z += _offset.z;
         }
 
-        return endPos -= _offset;
+        return endPos;
     }
 
     public Vector3 GetFinalPosition(GameObject _currBuilding, Vector3 _offset = default(Vector3), bool isLeftBuilding = false)
@@ -87,7 +88,7 @@ public class BuildingManager : MonoBehaviour
 
             float halfX = currBuildingBound.extents.x + platformBound.extents.x;
 
-            float halfY = currBuildingBound.extents.y - platformBound.extents.y;
+            float halfY = currBuildingBound.extents.y;
 
             if (isLeftBuilding == true)
             {
@@ -98,7 +99,7 @@ public class BuildingManager : MonoBehaviour
                 endPos.x -= halfX;
             }
 
-            endPos.y += halfY;
+            //endPos.y += halfY;
         }
 
         return endPos -= _offset;
