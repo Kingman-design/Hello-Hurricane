@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Data;
 using UnityEngine;
 
@@ -18,6 +19,13 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     Vector3 slideDirection;
     float slideSpeed;
     float slideDuration;
+
+    bool isElectric;
+    float wireDuration;
+    float wireInterval;
+    int randomElectric;
+
+    
 
     int jumpCount;
     float timer = 0;
@@ -61,14 +69,21 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 
         if (isSliding)
         {
-            controller.Move(slideDirection * slideSpeed * Time.deltaTime);
-            slideDuration -= Time.deltaTime;
-
             if (slideDuration <= 0)
             {
                 isSliding = false;
             }
+            
+            controller.Move(slideDirection * slideSpeed * Time.deltaTime);
+            slideDuration -= Time.deltaTime;
 
+        }
+        else if (isElectric)
+        {
+            if(randomElectric ==  0)
+            { 
+                Debug.Log("Zapped");
+            }
         }
 
         moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
@@ -112,6 +127,30 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         slideDuration = duration;
         slideSpeed = speed;
     }
+
+    public void StartWires(float duration, float interval)
+    {
+        //Debug.Log(wireInterval);
+        isElectric = true;
+        wireInterval = interval;
+        wireDuration = duration;
+        //Debug.Log(wireInterval);
+        StartCoroutine(Electrified());
+    }
+
+    private IEnumerator Electrified()
+    {
+        float timer = 0f;
+        //Debug.Log("Interval start");
+        while(timer < wireDuration)
+        {
+            Debug.Log("Start timer");
+            randomElectric = Random.Range(0, 100);
+            yield return new WaitForSeconds(wireInterval);
+        }
+        isElectric = false;
+    }
+
 
     public int GetSpeed()
     {
