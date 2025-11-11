@@ -129,7 +129,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            //you lose screen here
+            UIManager.instance.stateLose();
         }
     }
 
