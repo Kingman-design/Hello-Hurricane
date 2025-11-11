@@ -11,7 +11,6 @@ public class ObstacleCollision : MonoBehaviour
         if (dmg != null)
         {
             Destroy(transform.parent.gameObject);
-
             dmg.takeDamage(damageAmount);
         }
     }
