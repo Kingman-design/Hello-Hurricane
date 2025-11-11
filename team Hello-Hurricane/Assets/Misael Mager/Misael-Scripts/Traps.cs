@@ -75,8 +75,10 @@ public class Traps : MonoBehaviour
 
 
             }
-
-            Destroy(gameObject);
+            if (type != traptypes.puddle)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

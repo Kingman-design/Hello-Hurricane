@@ -79,10 +79,11 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
             {
                 isSliding = false;
             }
-            
-            controller.Move(slideDirection * slideSpeed * Time.deltaTime);
-            slideDuration -= Time.deltaTime;
-
+            if (isElectric)
+            {
+                HP--;
+                isElectric = false;
+            }
         }
         else if (isElectric)
         {
@@ -141,6 +142,12 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         slideDirection = dir.normalized;
         slideDuration = duration;
         slideSpeed = speed;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        controller.Move(slideDirection * slideSpeed * Time.deltaTime);
+        
     }
 
     public void StartWires(float duration, float interval, float freezetime)
