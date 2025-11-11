@@ -24,7 +24,7 @@ public class EnemyAi : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player-MisealTest").GetComponent<Transform>();
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         EnemyVel = transform.localScale;
 
         Debug.Log(EnemyVel);
