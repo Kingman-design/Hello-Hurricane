@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Data;
 using UnityEngine;
 
@@ -15,31 +14,14 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     Vector3 moveDir;
     Vector3 playerVel;
 
-    // Sliding
-    bool isSliding;
-    Vector3 slideDirection;
-    float slideSpeed;
-    float slideDuration;
-
-    // Wires
-    bool isElectric;
-    float wireDuration;
-    float wireInterval;
-    float wirecounter;
-    float wiretimer = 0f;
-    float Freezetime;
-    int randomElectric;
-
-    bool canmove;
     int jumpCount;
-    float timer = 0f;
+    float timer = 0;
     int oldgravity;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         oldgravity = gravity;
-        canmove = true;
     }
 
     // Update is called once per frame
@@ -58,7 +40,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
                 gravity = oldgravity;
             }
         }
-        movement();
+        movement();  
     }
 
     void movement()
@@ -73,6 +55,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
             playerVel.y -= gravity * Time.deltaTime;
         }
 
+<<<<<<< HEAD
         if (isSliding)
         {
             if (slideDuration <= 0)
@@ -107,6 +90,10 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
             moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
             controller.Move(moveDir * speed * Time.deltaTime);
         }
+=======
+        moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
+        controller.Move(moveDir * speed * Time.deltaTime);
+>>>>>>> parent of f2f01cc (Merge remote-tracking branch 'origin/Misael-Dev' into Elias-Dev)
 
         jump();
         crouch();
@@ -140,6 +127,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         }
     }
 
+<<<<<<< HEAD
     public void StartSlide(Vector3 dir, float duration, float speed)
     {
         isSliding = true;
@@ -189,6 +177,8 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         canmove = true;
     }
 
+=======
+>>>>>>> parent of f2f01cc (Merge remote-tracking branch 'origin/Misael-Dev' into Elias-Dev)
     public int GetSpeed()
     {
         return speed;

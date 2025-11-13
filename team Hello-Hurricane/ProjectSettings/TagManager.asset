@@ -14,7 +14,6 @@ TagManager:
   - DestroyPlatform
   - DestroyBuilding
   - DestroyObstacle
-  - PropaneTank
   layers:
   - Default
   - TransparentFX
