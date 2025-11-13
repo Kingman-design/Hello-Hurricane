@@ -84,13 +84,10 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
                 HP--;
                 isElectric = false;
             }
-<<<<<<< Updated upstream
-=======
 
             controller.Move(slideDirection * slideSpeed * Time.deltaTime);
             slideDuration -= Time.deltaTime;
 
->>>>>>> Stashed changes
         }
         else if (isElectric)
         {

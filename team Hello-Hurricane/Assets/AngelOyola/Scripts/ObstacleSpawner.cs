@@ -33,9 +33,10 @@ public class ObstacleSpawner : MonoBehaviour
                 pointsInRow.Add(row.GetChild(j));
             }
 
-            float randomObstacleRoll = Random.value;
+            // --- New Challenge Logic ---
+            float randomChallengeRoll = Random.value;
 
-            if (randomObstacleRoll < blockObstacleProbability)
+            if (randomChallengeRoll < blockObstacleProbability)
             {
                 SpawnBlockObstacles(pointsInRow, blockObstaclePrefabs);
             }
