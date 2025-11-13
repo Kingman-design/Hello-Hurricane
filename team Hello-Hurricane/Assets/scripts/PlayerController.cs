@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Data;
 using UnityEngine;
 
@@ -13,6 +14,21 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     [SerializeField] float targettime;
     Vector3 moveDir;
     Vector3 playerVel;
+
+    bool isSliding;
+    Vector3 slideDirection;
+    float slideSpeed;
+    float slideDuration;
+
+    // Wires
+    bool isElectric;
+    bool canmove;
+    int randomElectric;
+    float wireDuration;
+    float wireInterval;
+    float Freezetime;
+    float wiretimer;
+    float wirecounter;
 
     int jumpCount;
     float timer = 0;
@@ -55,7 +71,6 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
             playerVel.y -= gravity * Time.deltaTime;
         }
 
-<<<<<<< HEAD
         if (isSliding)
         {
             if (slideDuration <= 0)
@@ -90,10 +105,6 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
             moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
             controller.Move(moveDir * speed * Time.deltaTime);
         }
-=======
-        moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        controller.Move(moveDir * speed * Time.deltaTime);
->>>>>>> parent of f2f01cc (Merge remote-tracking branch 'origin/Misael-Dev' into Elias-Dev)
 
         jump();
         crouch();
@@ -127,7 +138,6 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         }
     }
 
-<<<<<<< HEAD
     public void StartSlide(Vector3 dir, float duration, float speed)
     {
         isSliding = true;
@@ -177,8 +187,6 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         canmove = true;
     }
 
-=======
->>>>>>> parent of f2f01cc (Merge remote-tracking branch 'origin/Misael-Dev' into Elias-Dev)
     public int GetSpeed()
     {
         return speed;
