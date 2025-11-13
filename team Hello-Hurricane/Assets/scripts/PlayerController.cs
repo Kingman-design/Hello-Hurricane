@@ -148,12 +148,6 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         slideSpeed = speed;
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        controller.Move(slideDirection * slideSpeed * Time.deltaTime);
-        
-    }
-
     public void StartWires(float duration, float interval, float freezetime)
     {
         //Debug.Log(wireInterval);
