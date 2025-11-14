@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 using System;
 
 public class ObjectPoolerManager : MonoBehaviour
@@ -70,8 +69,6 @@ public class ObjectPoolerManager : MonoBehaviour
 
         objectToSpawn.transform.position = _position;
         objectToSpawn.transform.rotation = _rotation;
-
-        //poolDictionary[tag].Enqueue(objectToSpawn);
 
         return objectToSpawn;
     }
@@ -141,11 +138,6 @@ public class ObjectPoolerManager : MonoBehaviour
         poolDictionary.Add(_object.tag, objPool);
     }
 
-    void InvokeSpwaning() 
-    {
-        OnDoneAddingToDictionary?.Invoke();
-    }
-
     public void ResetObjectPooling()
     {
         if (poolDictionary == null)
@@ -189,7 +181,7 @@ public class ObjectPoolerManager : MonoBehaviour
             }
         }
 
-        InvokeSpwaning();
+        OnDoneAddingToDictionary?.Invoke();
     }
 
     void OnEnable()

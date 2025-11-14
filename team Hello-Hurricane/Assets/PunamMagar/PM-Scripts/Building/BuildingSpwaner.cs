@@ -35,7 +35,6 @@ public class BuildingSpwaner : MonoBehaviour
     void Start()
     {
         objectPoolerManager = ObjectPoolerManager.Instance;
-        platformManager = PlatformManager.Instance;
         buildingManager = BuildingManager.Instance;
 
         //transform.position = platformManager.latestPlatform.transform.position;
@@ -59,6 +58,16 @@ public class BuildingSpwaner : MonoBehaviour
 
     public void SpwanBuilding() 
     {
+        if (objectPoolerManager == null) 
+        {
+            objectPoolerManager = ObjectPoolerManager.Instance;
+        }
+
+        if (buildingManager == null) 
+        {
+            buildingManager = BuildingManager.Instance;
+        }
+
         string randTag = "";
         if (Type == BuildingType.Foreground)
         {
@@ -110,17 +119,9 @@ public class BuildingSpwaner : MonoBehaviour
 
     void SpwanInitialPlatforms() 
     {
-
         for (int i = 0; i < maxNumOfBuildings; i++)
         {
             SpwanBuilding();
         }
-
-
-        //if (hasMaxSpwaned == false)
-        //{
-            
-        //    hasMaxSpwaned = true;
-        //}
     }
 }

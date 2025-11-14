@@ -28,6 +28,8 @@ public class Building : MonoBehaviour
     [HideInInspector]
     public BuildingSpwaner buildingSpwaner;
 
+    float Xbound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,6 +39,8 @@ public class Building : MonoBehaviour
         {
             backgroundSpeedFactor = 1.0f;
         }
+
+        Xbound = buildingRenderer.bounds.extents.x;
     }
 
     // Update is called once per frame

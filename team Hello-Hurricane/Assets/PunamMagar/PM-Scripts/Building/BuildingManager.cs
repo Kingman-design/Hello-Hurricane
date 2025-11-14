@@ -42,9 +42,11 @@ public class BuildingManager : MonoBehaviour
             Bounds platformBound = platformRenderer.bounds;
             Bounds currBuildingBound = currBuldRenderer.bounds;
 
+            currBuildingBound.center = Vector3.zero;
+
             float halfX = currBuildingBound.extents.x + platformBound.extents.x;
 
-            float halfY = currBuildingBound.extents.y;
+            float halfY = platformBound.extents.y;
 
             float halfZ = lastBuildingBound.extents.z + currBuildingBound.extents.z;
 
@@ -57,10 +59,10 @@ public class BuildingManager : MonoBehaviour
                 endPos.x -= halfX;
             }
                 
-            //endPos.y += halfY;
+            endPos.y += halfY;
 
             float zOffset = 0f;
-            zOffset = Random.Range(_offset.z, _offset.z + zOffsetRange);
+            //zOffset = Random.Range(_offset.z, _offset.z + zOffsetRange);
 
             endPos.x -= _offset.x;
 
@@ -88,7 +90,7 @@ public class BuildingManager : MonoBehaviour
 
             float halfX = currBuildingBound.extents.x + platformBound.extents.x;
 
-            float halfY = currBuildingBound.extents.y;
+            float halfY = platformBound.extents.y;
 
             if (isLeftBuilding == true)
             {
@@ -99,7 +101,7 @@ public class BuildingManager : MonoBehaviour
                 endPos.x -= halfX;
             }
 
-            //endPos.y += halfY;
+            endPos.y += halfY;
         }
 
         return endPos -= _offset;
