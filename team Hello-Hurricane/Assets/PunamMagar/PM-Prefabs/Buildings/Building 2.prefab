@@ -58,6 +58,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5265436591354112990}
     m_Modifications:
+    - target: {fileID: 2055086107477539897, guid: 88ac6f3114fb2044ba4549326a28b104, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055086107477539897, guid: 88ac6f3114fb2044ba4549326a28b104, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055086107477539897, guid: 88ac6f3114fb2044ba4549326a28b104, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055086107477539897, guid: 88ac6f3114fb2044ba4549326a28b104, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055086107477539897, guid: 88ac6f3114fb2044ba4549326a28b104, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055086107477539897, guid: 88ac6f3114fb2044ba4549326a28b104, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5250085691837165682, guid: 88ac6f3114fb2044ba4549326a28b104, type: 3}
       propertyPath: m_Name
       value: Building8

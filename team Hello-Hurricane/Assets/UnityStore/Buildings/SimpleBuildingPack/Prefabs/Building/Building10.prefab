@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5406777715457962918}
   - component: {fileID: 4784865357371468746}
   - component: {fileID: 8820831072209775688}
-  - component: {fileID: 7086418826200862554}
+  - component: {fileID: 415338615024061464}
+  - component: {fileID: 8019128250792435322}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -59,6 +60,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -88,8 +92,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7086418826200862554
-MeshCollider:
+--- !u!65 &415338615024061464
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -103,13 +107,25 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6742025349387253990, guid: 54b89018d0ec892459ae97f030735747, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 16.556564, y: 43.521164, z: 16.03305}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8019128250792435322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3449500249250130407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3374e5c79ca8cd4429233aa5b233b14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  building: {fileID: 0}
 --- !u!1 &8016510881455384520
 GameObject:
   m_ObjectHideFlags: 0

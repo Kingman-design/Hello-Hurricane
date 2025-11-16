@@ -43,7 +43,8 @@ GameObject:
   - component: {fileID: 7620789977344633490}
   - component: {fileID: 8775985812385547056}
   - component: {fileID: 2288753492512214844}
-  - component: {fileID: 9134148357348547874}
+  - component: {fileID: 6933819471442536187}
+  - component: {fileID: 6441286532745870074}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -91,6 +92,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -118,7 +122,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9134148357348547874
+--- !u!114 &6933819471442536187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7350309273429448961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3374e5c79ca8cd4429233aa5b233b14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  building: {fileID: 0}
+--- !u!65 &6441286532745870074
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,9 +150,9 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 13.511459, y: 29.649418, z: 10.189442}
-  m_Center: {x: 0.041702747, y: 14.824709, z: 0.20333433}
+  m_Size: {x: 27.022919, y: 59.298836, z: 20.378883}
+  m_Center: {x: 0, y: -0.0000009536743, z: 0}

@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5809490259487108970}
   - component: {fileID: 3665979891073408753}
   - component: {fileID: 159707214182195854}
-  - component: {fileID: 5394259635053776242}
+  - component: {fileID: 8527216245179610471}
+  - component: {fileID: 1683976807528282430}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -59,6 +60,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -87,7 +91,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5394259635053776242
+--- !u!65 &8527216245179610471
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,12 +106,25 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.3611145, y: 29.623142, z: 12.255737}
-  m_Center: {x: -0.03299284, y: 14.811571, z: 0.0125494}
+  m_Size: {x: 10.722229, y: 59.246284, z: 24.511475}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1683976807528282430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5495100851411665229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3374e5c79ca8cd4429233aa5b233b14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  building: {fileID: 0}
 --- !u!1 &9048947294383255777
 GameObject:
   m_ObjectHideFlags: 0

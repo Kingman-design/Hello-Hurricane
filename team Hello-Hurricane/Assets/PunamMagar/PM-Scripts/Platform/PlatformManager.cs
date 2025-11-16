@@ -17,9 +17,7 @@ public class PlatformManager : MonoBehaviour
 
     Renderer platformModelRenderer;
 
-    [Header("Speed Settings")]
-    [SerializeField] float speed = 10f;
-    [SerializeField] float speedIncreaseRate = 0.1f;
+    float speed;
 
     Platform latestPlatformScript;
 
@@ -27,8 +25,6 @@ public class PlatformManager : MonoBehaviour
 
     //Original Settings
     float originalSpeed;
-
-    bool hasInitialSpawned = false;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -45,12 +41,11 @@ public class PlatformManager : MonoBehaviour
     private void Start()
     {
         objectPoolerManager = ObjectPoolerManager.Instance;
-        originalSpeed = speed;
     }
 
     private void Update()
     {
-        speed += speedIncreaseRate * Time.deltaTime;
+        speed = GameManager.Instance.currentSpeed;
     }
 
     public void SpawnNextPlatform()
@@ -115,22 +110,10 @@ public class PlatformManager : MonoBehaviour
     private void OnEnable()
     {
         ObjectPoolerManager.OnDoneAddingToDictionary += SpwanInitialPlatforms;
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         ObjectPoolerManager.OnDoneAddingToDictionary -= SpwanInitialPlatforms;
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    void ResetSettings() 
-    {
-        speed = originalSpeed;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        ResetSettings();
     }
 }

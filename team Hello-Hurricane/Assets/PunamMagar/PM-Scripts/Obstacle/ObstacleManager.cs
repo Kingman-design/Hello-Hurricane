@@ -130,13 +130,13 @@ public class ObstacleManager : MonoBehaviour
     private void OnEnable()
     {
         PlatformManager.OnPlatformSpawned += SpwanInitialObstacle;
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        GameManager.OnGameReset += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         PlatformManager.OnPlatformSpawned -= SpwanInitialObstacle;
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        GameManager.OnGameReset -= OnSceneLoaded;
     }
 
     void ResetSettings()
@@ -144,7 +144,7 @@ public class ObstacleManager : MonoBehaviour
         spwanParent.position = originalSpwanParent;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    void OnSceneLoaded()
     {
         ResetSettings();
     }

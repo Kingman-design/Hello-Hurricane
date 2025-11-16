@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialSpwan: 10
-  minLanesToSpwan: 3
+  minLanesToSpwan: 1
   spwanDistance: 40
   spwanParent: {fileID: 223933168416038313}
   lanes:
