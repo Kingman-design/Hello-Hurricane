@@ -5,7 +5,7 @@ public class buttonFunction : MonoBehaviour
 {
    public void onStart()
     {
-        gameManager.instance.stateDifficulty();
+        UIManager.instance.stateDifficulty();
     }
 
     public void onQuit()
@@ -25,26 +25,26 @@ public class buttonFunction : MonoBehaviour
     //public void onMedium()
     //{
        
-    //    gameManager.instance.stateUnpause();
+    //    UIManager.instance.stateUnpause();
     //}
     //public void onHard()
     //{
-    //    gameManager.instance.stateUnpause();
+    //    UIManager.instance.stateUnpause();
     //}
     public void onBack() 
     {
-        gameManager.instance.stateTitle();
+        UIManager.instance.stateTitle();
     }
 
     public void onResume()
     {
-        gameManager.instance.stateUnpause();
+        UIManager.instance.stateUnpause();
     }
 
     public void onRestart()     //i know this is not great but i'm tired
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        gameManager.instance.stateUnpause();
+        UIManager.instance.stateUnpause();
     }
 
     //public void onTitle()
@@ -56,7 +56,7 @@ public class buttonFunction : MonoBehaviour
     //public void loadLevel(int lvl)
     //{
     //    SceneManager.LoadScene(lvl);
-    //    //gameManager.instance.stateUnpause();
+    //    //UIManager.instance.stateUnpause();
 
     //}
 }
