@@ -4,6 +4,7 @@ using UnityEngine;
 public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
+    [SerializeField] CapsuleCollider collider;
 
     [SerializeField] int speed;
     [SerializeField] int JumpSpeed;
@@ -11,35 +12,39 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     [SerializeField] int gravity;
     [SerializeField] int HP;
     [SerializeField] float targettime;
+    [SerializeField] Renderer model;
+    [SerializeField] Animator anim;
+    
     Vector3 moveDir;
     Vector3 playerVel;
 
     int jumpCount;
     float timer = 0;
-    int oldgravity = 0;
+    int oldgravity;
+    float oldheight;
+    float oldcolliderheight;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        oldgravity = gravity;
+        oldheight = controller.height;
+        oldcolliderheight = collider.height;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.localScale.y == 0.5f)
+        if (controller.height <= 1)
         {
-            if (gravity < 50)
-            {
-               oldgravity = gravity;
-            }
             gravity = 1000;
             timer += Time.deltaTime;
             if (timer >= targettime)
             {
-                transform.localScale = new Vector3(1, 1, 1);
+                controller.height = oldheight;
                 timer = 0;
                 gravity = oldgravity;
+                collider.height = oldcolliderheight;
             }
         }
         movement();  
@@ -70,14 +75,16 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         {
             playerVel.y = JumpSpeed;
             jumpCount++;
+            anim.SetTrigger("Jump");
         }
     }
     void crouch()
     {
         if (Input.GetButtonDown("Crouch"))
         {
-            transform.localScale = new Vector3(1, 0.5f, 1);
-            transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y - 1, transform.localPosition.z);
+            controller.height = controller.height / 2;
+            collider.height = controller.height / 2;
+            anim.SetTrigger("Crouch");
         }
     }
 
