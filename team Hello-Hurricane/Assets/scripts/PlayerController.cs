@@ -5,6 +5,7 @@ using UnityEngine;
 public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
+    [SerializeField] CapsuleCollider collider;
 
     [SerializeField] int speed;
     [SerializeField] int JumpSpeed;
@@ -12,12 +13,17 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     [SerializeField] int gravity;
     [SerializeField] int HP;
     [SerializeField] float targettime;
+    [SerializeField] Renderer model;
+    [SerializeField] Animator anim;
+
     Vector3 moveDir;
     Vector3 playerVel;
 
     int jumpCount;
     float timer = 0;
-    int oldgravity = 0;
+    int oldgravity;
+    float oldheight;
+    float oldcolliderheight;
 
     // Slide
     bool isSliding;
@@ -41,27 +47,26 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     {
         oldgravity = gravity;
         canmove = true;
+        oldheight = controller.height;
+        oldcolliderheight = collider.height;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.localScale.y == 0.5f)
+        if (controller.height <= 1)
         {
-            if (gravity < 50)
-            {
-               oldgravity = gravity;
-            }
             gravity = 1000;
             timer += Time.deltaTime;
             if (timer >= targettime)
             {
-                transform.localScale = new Vector3(1, 1, 1);
+                controller.height = oldheight;
                 timer = 0;
                 gravity = oldgravity;
+                collider.height = oldcolliderheight;
             }
         }
-        movement();  
+        movement();
     }
 
     void movement()
@@ -79,9 +84,9 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
             playerVel.y -= gravity * Time.deltaTime;
         }
 
-        if(isSliding)
+        if (isSliding)
         {
-            if(slideDuration <= 0)
+            if (slideDuration <= 0)
             {
                 isSliding = false;
             }
@@ -95,7 +100,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         {
             Electrified();
 
-            if(randomElectric == 0)
+            if (randomElectric == 0)
             {
                 StartCoroutine(freezeplayer());
             }
@@ -105,12 +110,12 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         if (canmove)
         {
             moveDir = horizontal * transform.right + vertical * transform.forward;
-            controller.Move(moveDir * speed * Time.deltaTime); 
+            controller.Move(moveDir * speed * Time.deltaTime);
             jump();
             crouch();
             controller.Move(playerVel * Time.deltaTime);
         }
-       
+
     }
     void jump()
     {
@@ -118,14 +123,16 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         {
             playerVel.y = JumpSpeed;
             jumpCount++;
+            anim.SetTrigger("Jump");
         }
     }
     void crouch()
     {
         if (Input.GetButtonDown("Crouch"))
         {
-            transform.localScale = new Vector3(1, 0.5f, 1);
-            transform.position = new Vector3(transform.localPosition.x, transform.localPosition.y - 1, transform.localPosition.z);
+            controller.height = controller.height / 2;
+            collider.height = controller.height / 2;
+            anim.SetTrigger("Crouch");
         }
     }
 
@@ -179,7 +186,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         canmove = false;
         yield return new WaitForSeconds(freezeTime);
         canmove = true;
-    }    
+    }
 
 
     public Vector3 GetMoveDir()
