@@ -18,6 +18,14 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     float timer = 0;
     int oldgravity = 0;
 
+    // Slide
+    bool isSliding;
+    Vector3 slideDirection;
+    float slideSpeed;
+    float slideDuration;
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -47,6 +55,9 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 
     void movement()
     {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
         if (controller.isGrounded)
         {
             playerVel = Vector3.zero;
@@ -57,7 +68,21 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
             playerVel.y -= gravity * Time.deltaTime;
         }
 
-        moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
+        if(isSliding)
+        {
+            if(slideDuration <= 0)
+            {
+                isSliding = false;
+            }
+
+
+            controller.Move(slideDirection * slideSpeed * Time.deltaTime);
+            slideDuration -= Time.deltaTime;
+
+        }
+
+
+        moveDir = horizontal * transform.right + vertical * transform.forward;
         controller.Move(moveDir * speed * Time.deltaTime);
 
         jump();
@@ -89,6 +114,19 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         {
             UIManager.instance.stateLose();
         }
+    }
+
+    public void StartSlide(Vector3 dir, float duration, float speed)
+    {
+        isSliding = true;
+        slideDuration = duration;
+        slideSpeed = speed;
+        slideDirection = dir;
+    }
+
+    public Vector3 GetMoveDir()
+    {
+        return moveDir;
     }
 
     public int GetSpeed()

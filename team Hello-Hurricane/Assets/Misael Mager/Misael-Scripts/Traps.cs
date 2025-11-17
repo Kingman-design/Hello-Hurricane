@@ -11,9 +11,17 @@ public class Traps : MonoBehaviour
 
     [SerializeField] TrapTypes type;
 
-    //Tank
+    // Tank
     [SerializeField] int damagetank;
-    
+
+    // Slide
+    bool isSliding;
+    [SerializeField] Vector3 slideDirection;
+    [SerializeField] float slideSpeed;
+    [SerializeField] float slideDuration;
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,11 +48,30 @@ public class Traps : MonoBehaviour
                 dmg.takeDamage(damagetank);
             }
 
+            if (type == TrapTypes.puddle || type == TrapTypes.wires)
+            {
+                NewMonoBehaviourScript player = other.GetComponent<NewMonoBehaviourScript>();
+                //Debug.Log("Player");
+
+                if (player != null)
+                {
+                    //Debug.Log("Player checked");
+                    if (type == TrapTypes.puddle)
+                    {
+                        //Debug.Log("Puddle checked");
+
+                        slideDirection = player.GetMoveDir();
+
+                        player.StartSlide(slideDirection,slideDuration,slideSpeed);
+                    }
 
 
+
+                }
+            }
+
+            Destroy(gameObject);
         }
-    }
-
-
+     }
 
 }
