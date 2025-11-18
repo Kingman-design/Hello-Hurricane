@@ -115,7 +115,7 @@ MonoBehaviour:
     size: 50
   platforms:
   - tag: Platform-A
-    prefab: {fileID: 5175872285336961332, guid: 03ac9159632209e4b88f6f3e3acd0970, type: 3}
+    prefab: {fileID: 1734971447417121269, guid: a7c7365a6a5ab7446a3423b3204253e8, type: 3}
     size: 7
   obstacles:
   - tag: Obstacle-A

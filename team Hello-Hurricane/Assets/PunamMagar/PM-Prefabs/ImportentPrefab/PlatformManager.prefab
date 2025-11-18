@@ -46,12 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0cc5848dee0ab4db0f97a713262fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformPrefab: {fileID: 5175872285336961332, guid: 03ac9159632209e4b88f6f3e3acd0970, type: 3}
+  platformPrefab: {fileID: 1734971447417121269, guid: a7c7365a6a5ab7446a3423b3204253e8, type: 3}
   latestPlatform: {fileID: 0}
   spwanTransform: {fileID: 6868464114834696557}
   initialPlatformsToSpwan: 4
-  speed: 15
-  speedIncreaseRate: 0.1
 --- !u!1 &3202376418326685586
 GameObject:
   m_ObjectHideFlags: 0
