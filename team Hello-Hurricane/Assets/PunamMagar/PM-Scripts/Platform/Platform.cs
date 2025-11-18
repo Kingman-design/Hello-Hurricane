@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
@@ -10,10 +11,13 @@ public class Platform : MonoBehaviour
 
     PlatformManager platformManager;
 
+    float Xbound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         platformManager = PlatformManager.Instance;
+        Xbound = modelRenderer.bounds.extents.x;
     }
 
     // Update is called once per frame

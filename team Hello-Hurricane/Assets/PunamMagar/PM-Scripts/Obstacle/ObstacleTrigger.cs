@@ -11,7 +11,7 @@ public class ObstacleTrigger : MonoBehaviour
         {
             obstacle.ReturnObstacle();
 
-            ObstacleManager.Instance.SpwanObstacle();
+            //ObstacleManager.Instance.SpwanObstacle();
         }
     }
 }

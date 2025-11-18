@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlatformManager : MonoBehaviour
 {
     public static PlatformManager Instance;
+
+    public static event Action OnPlatformSpawned;
 
     [SerializeField] private GameObject platformPrefab;
     public GameObject latestPlatform;
@@ -13,15 +17,14 @@ public class PlatformManager : MonoBehaviour
 
     Renderer platformModelRenderer;
 
-    [Header("Speed Settings")]
-    [SerializeField] float speed = 10f;
-    [SerializeField] float speedIncreaseRate = 0.1f;
+    float speed;
 
     Platform latestPlatformScript;
 
     ObjectPoolerManager objectPoolerManager;
 
-    bool hasInitialSpawned = false;
+    //Original Settings
+    float originalSpeed;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -38,28 +41,20 @@ public class PlatformManager : MonoBehaviour
     private void Start()
     {
         objectPoolerManager = ObjectPoolerManager.Instance;
-
-        
     }
 
     private void Update()
     {
-        if (!hasInitialSpawned) 
-        {
-            for (int i = 0; i < initialPlatformsToSpwan; i++)
-            {
-                SpawnNextPlatform();
-            }
-
-            hasInitialSpawned = true;
-        }
-
-        speed += speedIncreaseRate * Time.deltaTime;
+        speed = GameManager.Instance.currentSpeed;
     }
 
     public void SpawnNextPlatform()
     {
         //latestPlatform = Instantiate(platformPrefab, GetEndPosition(_posA), Quaternion.identity, transform);
+        if (objectPoolerManager == null) 
+        {
+            objectPoolerManager = ObjectPoolerManager.Instance;
+        }
 
         Vector3 _posA;
         if (latestPlatformScript != null)
@@ -100,5 +95,25 @@ public class PlatformManager : MonoBehaviour
     public Renderer GetPlatformRenderer() 
     {
         return platformModelRenderer;
+    }
+
+    void SpwanInitialPlatforms() 
+    {
+        for (int i = 0; i < initialPlatformsToSpwan; i++)
+        {
+            SpawnNextPlatform();
+        }
+
+        OnPlatformSpawned?.Invoke();
+    }
+
+    private void OnEnable()
+    {
+        ObjectPoolerManager.OnDoneAddingToDictionary += SpwanInitialPlatforms;
+    }
+
+    private void OnDisable()
+    {
+        ObjectPoolerManager.OnDoneAddingToDictionary -= SpwanInitialPlatforms;
     }
 }
