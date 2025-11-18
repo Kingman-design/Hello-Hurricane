@@ -84,7 +84,7 @@ public class Audio : MonoBehaviour
 
     private void updatePitch()
     {
-        float targetPitch = Mathf.Clamp(bAudioPitch + (playerSpeed * 0.02f), bAudioPitch, maxPitch);
+        float targetPitch = Mathf.Clamp(bAudioPitch + (/*playerSpeed * */ 0.02f), bAudioPitch, maxPitch);
     }
 
     // note: bg music needs loop and play on awake, run audio is looped, jump/land/duck have neither.
