@@ -1012,12 +1012,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 809309649}
+  collider: {fileID: 0}
   speed: 35
   JumpSpeed: 15
   maxJumps: 1
   gravity: 35
   HP: 0
   targettime: 0
+  model: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!4 &809309654
 Transform:
   m_ObjectHideFlags: 0
@@ -1265,6 +1268,10 @@ PrefabInstance:
     - target: {fileID: 1201525335974375460, guid: f6c40205085831149a130b37b8224194, type: 3}
       propertyPath: m_Name
       value: Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928057044804940628, guid: f6c40205085831149a130b37b8224194, type: 3}
+      propertyPath: speed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8497017944284860846, guid: f6c40205085831149a130b37b8224194, type: 3}
       propertyPath: m_LocalPosition.x
