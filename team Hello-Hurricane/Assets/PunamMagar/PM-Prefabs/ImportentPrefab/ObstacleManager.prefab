@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 2958944808008665855}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4465832262062050859
 Transform:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3033aa289e6a18b4fbe1ebe2b94f206e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialSpwan: 20
+  initialSpwan: 10
   minLanesToSpwan: 1
   spwanDistance: 40
   spwanParent: {fileID: 223933168416038313}
@@ -203,7 +203,7 @@ Transform:
   m_GameObject: {fileID: 4876378161698478005}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -50}
+  m_LocalPosition: {x: 0, y: 0, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
