@@ -21,19 +21,23 @@ public class buttonFunction : MonoBehaviour
     {
         //GameManager.instance.SetToEasy();
         SceneManager.LoadScene("Prototype");
+        Time.timeScale = 1.0f;
         
     }
     public void onMedium()
     {
         //GameManager.instance.SetToMedium();
         SceneManager.LoadScene("Prototype");
-        
+        Time.timeScale = 1.0f;
+
+
     }
     public void onHard()
     {
         //GameManager.instance.SetToHard();
         SceneManager.LoadScene("Prototype");
-        
+        Time.timeScale = 1.0f;
+
     }
     public void onBack() 
     {
@@ -45,22 +49,18 @@ public class buttonFunction : MonoBehaviour
         UIManager.instance.stateUnpause();
     }
 
-    public void onRestart()     //i know this is not great but i'm tired
+    public void onRestart()   
     {
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         UIManager.instance.stateUnpause();
+
     }
 
-    //public void onTitle()
-    //{
-    //    SceneManager.LoadScene("Kathryn-Scene");
-    //}
+    public void onTitle()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
 
 
-    //public void loadLevel(int lvl)
-    //{
-    //    SceneManager.LoadScene(lvl);
-    //    //UIManager.instance.stateUnpause();
-
-    //}
 }
