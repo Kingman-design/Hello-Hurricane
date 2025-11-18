@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Data;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NewMonoBehaviourScript : MonoBehaviour, IDamage
@@ -24,6 +25,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     int oldgravity;
     float oldheight;
     float oldcolliderheight;
+    Renderer modelstart;
 
     // Slide
     bool isSliding;
@@ -49,6 +51,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         canmove = true;
         oldheight = controller.height;
         oldcolliderheight = collider.height;
+        modelstart = model;
     }
 
     // Update is called once per frame
@@ -132,6 +135,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         {
             controller.height = controller.height / 2;
             collider.height = controller.height / 2;
+            model.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y * 2, transform.position.z);
             anim.SetTrigger("Crouch");
         }
     }
