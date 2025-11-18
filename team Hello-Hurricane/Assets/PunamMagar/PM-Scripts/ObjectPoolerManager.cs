@@ -1,14 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
+using System;
 
 public class ObjectPoolerManager : MonoBehaviour
 {
     public static ObjectPoolerManager Instance;
 
+    public static event Action OnDoneAddingToDictionary;
+
     [System.Serializable]
-    public class Pool 
+    public class Pool
     {
         public string tag;
         public GameObject prefab;
@@ -16,12 +19,13 @@ public class ObjectPoolerManager : MonoBehaviour
     }
 
     [Header("Settings")]
-    [SerializeField] bool useObstacles = false;
+    public bool usePunamObstacles = false;
 
     [SerializeField] List<Pool> buildings;
     [SerializeField] List<Pool> buildingsBG;
     [SerializeField] List<Pool> platforms;
     [SerializeField] List<Pool> obstacles;
+    [SerializeField] List<Pool> nextObstacleTriggers;
 
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
@@ -38,69 +42,17 @@ public class ObjectPoolerManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R)) 
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
     private void Start()
     {
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
-        foreach (Pool building in buildings) 
-        {
-            Queue<GameObject> buildingPool = new Queue<GameObject>();
-
-            for (int i = 0; i < building.size; i++) 
-            {
-                GameObject obj = Instantiate(building.prefab);
-                obj.SetActive(false);
-                buildingPool.Enqueue(obj);
-            }
-
-            poolDictionary.Add(building.tag, buildingPool);
-        }
-
-        //For Background Buildings
-        foreach (Pool building in buildingsBG) 
-        {
-            Queue<GameObject> buildingPool = new Queue<GameObject>();
-
-            for (int i = 0; i < building.size; i++)
-            {
-                GameObject obj = Instantiate(building.prefab);
-                obj.SetActive(false);
-                buildingPool.Enqueue(obj);
-            }
-
-            poolDictionary.Add(building.tag, buildingPool);
-        }
-
-        //For Platforms
-        foreach (Pool platform in platforms) 
-        {
-            Queue<GameObject> platformPool = new Queue<GameObject>();
-
-            for (int i = 0; i < platform.size; i++)
-            {
-                GameObject obj = Instantiate(platform.prefab);
-                obj.SetActive(false);
-                platformPool.Enqueue(obj);
-            }
-
-            poolDictionary.Add(platform.tag, platformPool);
-        }
-
-        //For Obstacles
-        if (useObstacles && obstacles != null)
-        {
-            foreach (Pool obstacle in obstacles)
-            {
-                Queue<GameObject> obstaclePool = new Queue<GameObject>();
-                for (int i = 0; i < obstacle.size; i++)
-                {
-                    GameObject obj = Instantiate(obstacle.prefab);
-                    obj.SetActive(false);
-                    obstaclePool.Enqueue(obj);
-                }
-                poolDictionary.Add(obstacle.tag, obstaclePool);
-            }
-        }
+        ResetObjectPooling();
     }
 
     public GameObject SpawnFromPool(string _tag, Vector3 _position, Quaternion _rotation) 
@@ -118,39 +70,43 @@ public class ObjectPoolerManager : MonoBehaviour
         objectToSpawn.transform.position = _position;
         objectToSpawn.transform.rotation = _rotation;
 
-        //poolDictionary[tag].Enqueue(objectToSpawn);
-
         return objectToSpawn;
     }
 
     public string GetRandomObjectTag() 
     {
-        int randomIndex = Random.Range(0, poolDictionary.Count);
+        int randomIndex = UnityEngine.Random.Range(0, poolDictionary.Count);
         return poolDictionary.ElementAt(randomIndex).Key;
     }
 
     public string GetRandomBuildingTag()
     {
-        int randomIndex = Random.Range(0, buildings.Count);
+        int randomIndex = UnityEngine.Random.Range(0, buildings.Count);
         return buildings[randomIndex].tag;
     }
 
     public string GetRandomBGBuildingTag() 
     {
-        int randomIndex = Random.Range(0, buildingsBG.Count);
+        int randomIndex = UnityEngine.Random.Range(0, buildingsBG.Count);
         return buildingsBG[randomIndex].tag;
     }
 
     public string GetRandomPlatformTag() 
     {
-        int randomIndex = Random.Range(0, platforms.Count);
+        int randomIndex = UnityEngine.Random.Range(0, platforms.Count);
         return platforms[randomIndex].tag;
     }
 
     public string GetRandomObstacleTag() 
     {
-        int randomIndex = Random.Range(0, obstacles.Count);
+        int randomIndex = UnityEngine.Random.Range(0, obstacles.Count);
         return obstacles[randomIndex].tag;
+    }
+
+    public string GetNextObstacleTriggerTag() 
+    {
+        int randomIndex = UnityEngine.Random.Range(0, nextObstacleTriggers.Count);
+        return nextObstacleTriggers[randomIndex].tag;
     }
 
     public List<string> GetAllObstacleTags() 
@@ -167,5 +123,79 @@ public class ObjectPoolerManager : MonoBehaviour
     {
         obj.SetActive(false);
         poolDictionary[tag].Enqueue(obj);
+    }
+
+    void AddToDictionary(Pool _object) 
+    {
+        Queue<GameObject> objPool = new Queue<GameObject>();
+        for (int i = 0; i < _object.size; i++)
+        {
+            GameObject obj = Instantiate(_object.prefab);
+            obj.SetActive(false);
+            objPool.Enqueue(obj);
+        }
+
+        poolDictionary.Add(_object.tag, objPool);
+    }
+
+    public void ResetObjectPooling()
+    {
+        if (poolDictionary == null)
+        {
+            poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        }
+        else 
+        {
+            poolDictionary.Clear();
+        }
+
+        foreach (Pool building in buildings)
+        {
+            AddToDictionary(building);
+        }
+
+        //For Background Buildings
+        foreach (Pool building in buildingsBG)
+        {
+            AddToDictionary(building);
+        }
+
+        //For Platforms
+        foreach (Pool platform in platforms)
+        {
+            AddToDictionary(platform);
+        }
+
+        //For Obstacles
+        if (usePunamObstacles && obstacles.Count != 0)
+        {
+            foreach (Pool obstacle in obstacles)
+            {
+                AddToDictionary(obstacle);
+            }
+
+            //For Next Obstacle Triggers
+            foreach (Pool nextObstacleTrigger in nextObstacleTriggers)
+            {
+                AddToDictionary(nextObstacleTrigger);
+            }
+        }
+
+        OnDoneAddingToDictionary?.Invoke();
+    }
+
+    void OnEnable()
+    {
+        GameManager.OnGameReset += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnGameReset -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded()
+    {
+        ResetObjectPooling();
     }
 }
