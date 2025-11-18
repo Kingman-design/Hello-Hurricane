@@ -21,23 +21,16 @@ public class buttonFunction : MonoBehaviour
     {
         //GameManager.instance.SetToEasy();
         SceneManager.LoadScene("Prototype");
-        Time.timeScale = 1.0f;
-        
     }
     public void onMedium()
     {
         //GameManager.instance.SetToMedium();
         SceneManager.LoadScene("Prototype");
-        Time.timeScale = 1.0f;
-
-
     }
     public void onHard()
     {
         //GameManager.instance.SetToHard();
         SceneManager.LoadScene("Prototype");
-        Time.timeScale = 1.0f;
-
     }
     public void onBack() 
     {

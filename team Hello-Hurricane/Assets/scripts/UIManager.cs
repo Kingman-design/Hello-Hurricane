@@ -60,11 +60,8 @@ public class UIManager : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = timeScaleOrig;
-        if(SceneManager.GetActiveScene().name == "Prototype")       //trying to fix the timing issue
-        {                                                           //on onTitle;
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+        Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
     }
