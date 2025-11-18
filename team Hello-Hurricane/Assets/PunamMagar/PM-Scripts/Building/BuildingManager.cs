@@ -16,6 +16,8 @@ public class BuildingManager : MonoBehaviour
         }
 
         Instance = this;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

@@ -5,7 +5,7 @@ public class buttonFunction : MonoBehaviour
 {
    public void onStart()
     {
-        gameManager.instance.stateDifficulty();
+        UIManager.instance.stateDifficulty();
     }
 
     public void onQuit()
@@ -19,44 +19,41 @@ public class buttonFunction : MonoBehaviour
 
     public void onEasy()
     {
+        //GameManager.instance.SetToEasy();
         SceneManager.LoadScene("Prototype");
-        
     }
-    //public void onMedium()
-    //{
-       
-    //    gameManager.instance.stateUnpause();
-    //}
-    //public void onHard()
-    //{
-    //    gameManager.instance.stateUnpause();
-    //}
+    public void onMedium()
+    {
+        //GameManager.instance.SetToMedium();
+        SceneManager.LoadScene("Prototype");
+    }
+    public void onHard()
+    {
+        //GameManager.instance.SetToHard();
+        SceneManager.LoadScene("Prototype");
+    }
     public void onBack() 
     {
-        gameManager.instance.stateTitle();
+        UIManager.instance.stateTitle();
     }
 
     public void onResume()
     {
-        gameManager.instance.stateUnpause();
+        UIManager.instance.stateUnpause();
     }
 
-    public void onRestart()     //i know this is not great but i'm tired
+    public void onRestart()   
     {
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        gameManager.instance.stateUnpause();
+        UIManager.instance.stateUnpause();
+
     }
 
-    //public void onTitle()
-    //{
-    //    SceneManager.LoadScene("Kathryn-Scene");
-    //}
+    public void onTitle()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
 
 
-    //public void loadLevel(int lvl)
-    //{
-    //    SceneManager.LoadScene(lvl);
-    //    //gameManager.instance.stateUnpause();
-
-    //}
 }
