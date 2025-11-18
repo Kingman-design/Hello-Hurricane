@@ -19,18 +19,22 @@ public class buttonFunction : MonoBehaviour
 
     public void onEasy()
     {
+        //GameManager.instance.SetToEasy();
         SceneManager.LoadScene("Prototype");
         
     }
-    //public void onMedium()
-    //{
-       
-    //    UIManager.instance.stateUnpause();
-    //}
-    //public void onHard()
-    //{
-    //    UIManager.instance.stateUnpause();
-    //}
+    public void onMedium()
+    {
+        //GameManager.instance.SetToMedium();
+        SceneManager.LoadScene("Prototype");
+        
+    }
+    public void onHard()
+    {
+        //GameManager.instance.SetToHard();
+        SceneManager.LoadScene("Prototype");
+        
+    }
     public void onBack() 
     {
         UIManager.instance.stateTitle();
