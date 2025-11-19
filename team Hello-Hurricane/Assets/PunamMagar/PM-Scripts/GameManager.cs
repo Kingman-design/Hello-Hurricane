@@ -13,9 +13,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] LevelDifficulty medium_levelDifficulty;
     [SerializeField] LevelDifficulty hard_levelDifficulty;
 
+    [SerializeField] string mainGameScene;
+
     public float currentSpeed = 0;
 
     int startingSpeed;
+    float gameScore = 0;
 
     float speedIncrementRate;
     float incrementRate;
@@ -56,6 +59,8 @@ public class GameManager : MonoBehaviour
 
         incrementRate = speedIncrementRate * Time.deltaTime;
         currentSpeed += incrementRate;
+
+        gameScore += Time.deltaTime * currLevelDifficulty.scoreMultiplier;
     }
 
     private void OnEnable()
@@ -71,7 +76,15 @@ public class GameManager : MonoBehaviour
     void ResetGame(Scene scene, LoadSceneMode mode)
     {
         SetDifficulty();
-        OnGameReset?.Invoke();
+
+        currentSpeed = 0;
+        lerpTime = 0;
+        gameScore = 0;
+
+        if (SceneManager.GetActiveScene().name == mainGameScene) 
+        {
+            OnGameReset?.Invoke();
+        }
     }
 
     public void SetToEasy() 
@@ -90,6 +103,11 @@ public class GameManager : MonoBehaviour
     {
         currLevelDifficulty = hard_levelDifficulty;
         SetDifficulty();
+    }
+
+    public string GetScoreText() 
+    {
+        return gameScore.ToString("F0");
     }
 
     void SetDifficulty() 

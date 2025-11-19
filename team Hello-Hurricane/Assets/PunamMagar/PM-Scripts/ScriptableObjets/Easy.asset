@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficultyLevel: 0
   timeToReachStartSpeed: 1
-  startingSpeed: 20
+  startingSpeed: 10
   speedIncrementRate: 0.2
+  scoreMultiplier: 10

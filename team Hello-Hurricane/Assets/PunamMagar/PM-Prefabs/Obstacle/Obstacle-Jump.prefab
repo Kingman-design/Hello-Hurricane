@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6731116583357145307}
   - component: {fileID: 8750689867257153308}
   - component: {fileID: 2690606279138861294}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2605582305471328796}
   - component: {fileID: 9108592501405295053}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle-Jump
   m_TagString: JumpMG
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 7492583676416791934}
   - component: {fileID: 5778212240650961348}
   - component: {fileID: 1826349704536406491}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

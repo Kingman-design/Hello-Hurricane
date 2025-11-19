@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6258258946717194139}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Concrete_Barrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 3235626381712059502}
   - component: {fileID: 5280854682568158283}
   - component: {fileID: 8794322207993457186}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
