@@ -15,10 +15,10 @@ public class Traps : MonoBehaviour
     [SerializeField] int damagetank;
 
     // Slide
-    bool isSliding;
-    [SerializeField] Vector3 slideDirection;
-    [SerializeField] float slideSpeed;
-    [SerializeField] float slideDuration;
+    //bool isSliding;
+    //[SerializeField] Vector3 slideDirection;
+    //[SerializeField] float slideSpeed;
+    //[SerializeField] float slideDuration;
 
     // Wires
     bool isElectrized;
@@ -65,9 +65,9 @@ public class Traps : MonoBehaviour
                     {
                         //Debug.Log("Puddle checked");
 
-                        slideDirection = player.GetMoveDir();
+                        player.IsOnPuddle();
 
-                        player.StartSlide(slideDirection,slideDuration,slideSpeed);
+                        
                     }
 
                     if (type == TrapTypes.wires)
