@@ -13,5 +13,10 @@ public class ObstacleCollision : MonoBehaviour
             Destroy(transform.parent.gameObject);
             dmg.takeDamage(damageAmount);
         }
+
+        if (other.CompareTag("DestroyObstacle"))
+        {
+            Destroy(transform.parent.gameObject);
+        }
     }
 }
