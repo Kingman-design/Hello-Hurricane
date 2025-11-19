@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 682678710856925512, guid: 8558426eafc471d48a06a69fb0ef1542, type: 3}
       propertyPath: usePunamObstacles
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3007497699969728808, guid: 8558426eafc471d48a06a69fb0ef1542, type: 3}
       propertyPath: m_LocalPosition.x
