@@ -19,17 +19,17 @@ public class buttonFunction : MonoBehaviour
 
     public void onEasy()
     {
-        //GameManager.instance.SetToEasy();
+        GameManager.Instance.SetToEasy();
         SceneManager.LoadScene("Prototype");
     }
     public void onMedium()
     {
-        //GameManager.instance.SetToMedium();
+        GameManager.Instance.SetToMedium();
         SceneManager.LoadScene("Prototype");
     }
     public void onHard()
     {
-        //GameManager.instance.SetToHard();
+        GameManager.Instance.SetToHard();
         SceneManager.LoadScene("Prototype");
     }
     public void onBack() 
@@ -53,6 +53,7 @@ public class buttonFunction : MonoBehaviour
     public void onTitle()
     {
         SceneManager.LoadScene("TitleScene");
+
     }
 
 

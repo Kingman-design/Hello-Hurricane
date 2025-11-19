@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Data;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NewMonoBehaviourScript : MonoBehaviour, IDamage
@@ -24,12 +25,13 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     int oldgravity;
     float oldheight;
     float oldcolliderheight;
+    Renderer modelstart;
 
     // Slide
     bool isSliding;
-    Vector3 slideDirection;
-    float slideSpeed;
-    float slideDuration;
+    //Vector3 slideDirection;
+    //float slideSpeed;
+    //float slideDuration;
 
     // Wires
     bool isElectric;
@@ -49,6 +51,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         canmove = true;
         oldheight = controller.height;
         oldcolliderheight = collider.height;
+        modelstart = model;
     }
 
     // Update is called once per frame
@@ -86,14 +89,20 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 
         if (isSliding)
         {
-            if (slideDuration <= 0)
+            //if (slideDuration <= 0)
+            //{
+            //    isSliding = false;
+            //}
+            //controller.Move(slideDirection * slideSpeed * Time.deltaTime);
+            //slideDuration -= Time.deltaTime;
+
+            if (isElectric)
             {
-                isSliding = false;
+                takeDamage(1);
+                isElectric = false;
+                wireIntervalTimer = 0;
+                wireTotalTime = 0;
             }
-
-
-            controller.Move(slideDirection * slideSpeed * Time.deltaTime);
-            slideDuration -= Time.deltaTime;
 
         }
         else if (isElectric)
@@ -132,6 +141,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         {
             controller.height = controller.height / 2;
             collider.height = controller.height / 2;
+            model.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y * 2, transform.position.z);
             anim.SetTrigger("Crouch");
         }
     }
@@ -146,13 +156,19 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         }
     }
 
-    public void StartSlide(Vector3 dir, float duration, float speed)
+    //public void StartSlide(Vector3 dir, float duration, float speed)
+    //{
+    //    isSliding = true;
+    //    slideDuration = duration;
+    //    slideSpeed = speed;
+    //    slideDirection = dir;
+    //}
+
+    public void IsOnPuddle()
     {
         isSliding = true;
-        slideDuration = duration;
-        slideSpeed = speed;
-        slideDirection = dir;
     }
+
 
     public void StartWires(float duration, float interval, float freezetime)
     {
