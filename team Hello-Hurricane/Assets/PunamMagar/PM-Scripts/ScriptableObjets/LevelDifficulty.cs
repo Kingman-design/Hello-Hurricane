@@ -20,4 +20,7 @@ public class LevelDifficulty : ScriptableObject
 
     [Range(0.1f, 10f)]
     public float speedIncrementRate;
+
+    [Range(1, 100)]
+    public int scoreMultiplier;
 }

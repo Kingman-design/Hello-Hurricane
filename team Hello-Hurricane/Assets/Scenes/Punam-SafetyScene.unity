@@ -579,8 +579,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d86e933e6ca983a45ad912f7d7fa9882, type: 2}
+  m_sharedMaterial: {fileID: -5660775149628104760, guid: d86e933e6ca983a45ad912f7d7fa9882, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1273,6 +1273,10 @@ PrefabInstance:
       propertyPath: speed
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 7928057044804940628, guid: f6c40205085831149a130b37b8224194, type: 3}
+      propertyPath: JumpSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8497017944284860846, guid: f6c40205085831149a130b37b8224194, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1525,6 +1529,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5757015954721568567, guid: 66a312c3586c4fc4f820530c5b676a45, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 472617964}
     - target: {fileID: 6504826150445866790, guid: 66a312c3586c4fc4f820530c5b676a45, type: 3}
       propertyPath: m_Name
       value: GameManager

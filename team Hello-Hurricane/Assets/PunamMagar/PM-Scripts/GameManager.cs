@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public float currentSpeed = 0;
 
     int startingSpeed;
+    float gameScore = 0;
 
     float speedIncrementRate;
     float incrementRate;
@@ -58,6 +59,8 @@ public class GameManager : MonoBehaviour
 
         incrementRate = speedIncrementRate * Time.deltaTime;
         currentSpeed += incrementRate;
+
+        gameScore += Time.deltaTime * currLevelDifficulty.scoreMultiplier;
     }
 
     private void OnEnable()
@@ -73,8 +76,10 @@ public class GameManager : MonoBehaviour
     void ResetGame(Scene scene, LoadSceneMode mode)
     {
         SetDifficulty();
+
         currentSpeed = 0;
         lerpTime = 0;
+        gameScore = 0;
 
         if (SceneManager.GetActiveScene().name == mainGameScene) 
         {
@@ -98,6 +103,11 @@ public class GameManager : MonoBehaviour
     {
         currLevelDifficulty = hard_levelDifficulty;
         SetDifficulty();
+    }
+
+    public string GetScoreText() 
+    {
+        return gameScore.ToString("F0");
     }
 
     void SetDifficulty() 
