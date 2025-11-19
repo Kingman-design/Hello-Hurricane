@@ -49,18 +49,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == mainGameScene)
+        if (currentSpeed < startingSpeed - 0.01f)
         {
-            if (currentSpeed < startingSpeed - 0.01f)
-            {
-                lerpTime += Time.deltaTime / currLevelDifficulty.timeToReachStartSpeed;
-                currentSpeed = Mathf.Lerp(0, startingSpeed, lerpTime);
-                return;
-            }
-
-            incrementRate = speedIncrementRate * Time.deltaTime;
-            currentSpeed += incrementRate;
+            lerpTime += Time.deltaTime / currLevelDifficulty.timeToReachStartSpeed;
+            currentSpeed = Mathf.Lerp(0, startingSpeed, lerpTime);
+            return;
         }
+
+        incrementRate = speedIncrementRate * Time.deltaTime;
+        currentSpeed += incrementRate;
     }
 
     private void OnEnable()
