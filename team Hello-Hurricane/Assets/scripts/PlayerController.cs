@@ -29,9 +29,9 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 
     // Slide
     bool isSliding;
-    Vector3 slideDirection;
-    float slideSpeed;
-    float slideDuration;
+    //Vector3 slideDirection;
+    //float slideSpeed;
+    //float slideDuration;
 
     // Wires
     bool isElectric;
@@ -89,14 +89,20 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 
         if (isSliding)
         {
-            if (slideDuration <= 0)
+            //if (slideDuration <= 0)
+            //{
+            //    isSliding = false;
+            //}
+            //controller.Move(slideDirection * slideSpeed * Time.deltaTime);
+            //slideDuration -= Time.deltaTime;
+
+            if (isElectric)
             {
-                isSliding = false;
+                takeDamage(1);
+                isElectric = false;
+                wireIntervalTimer = 0;
+                wireTotalTime = 0;
             }
-
-
-            controller.Move(slideDirection * slideSpeed * Time.deltaTime);
-            slideDuration -= Time.deltaTime;
 
         }
         else if (isElectric)
@@ -150,13 +156,19 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         }
     }
 
-    public void StartSlide(Vector3 dir, float duration, float speed)
+    //public void StartSlide(Vector3 dir, float duration, float speed)
+    //{
+    //    isSliding = true;
+    //    slideDuration = duration;
+    //    slideSpeed = speed;
+    //    slideDirection = dir;
+    //}
+
+    public void IsOnPuddle()
     {
         isSliding = true;
-        slideDuration = duration;
-        slideSpeed = speed;
-        slideDirection = dir;
     }
+
 
     public void StartWires(float duration, float interval, float freezetime)
     {
