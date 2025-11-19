@@ -53,6 +53,7 @@ public class buttonFunction : MonoBehaviour
     public void onTitle()
     {
         SceneManager.LoadScene("TitleScene");
+
     }
 
 

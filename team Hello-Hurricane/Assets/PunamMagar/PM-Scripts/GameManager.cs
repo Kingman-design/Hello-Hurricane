@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] LevelDifficulty medium_levelDifficulty;
     [SerializeField] LevelDifficulty hard_levelDifficulty;
 
+    [SerializeField] string mainGameScene;
+
     public float currentSpeed = 0;
 
     int startingSpeed;
@@ -47,15 +49,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentSpeed < startingSpeed - 0.01f)
+        if (SceneManager.GetActiveScene().name == mainGameScene)
         {
-            lerpTime += Time.deltaTime / currLevelDifficulty.timeToReachStartSpeed;
-            currentSpeed = Mathf.Lerp(0, startingSpeed, lerpTime);
-            return;
-        }
+            if (currentSpeed < startingSpeed - 0.01f)
+            {
+                lerpTime += Time.deltaTime / currLevelDifficulty.timeToReachStartSpeed;
+                currentSpeed = Mathf.Lerp(0, startingSpeed, lerpTime);
+                return;
+            }
 
-        incrementRate = speedIncrementRate * Time.deltaTime;
-        currentSpeed += incrementRate;
+            incrementRate = speedIncrementRate * Time.deltaTime;
+            currentSpeed += incrementRate;
+        }
     }
 
     private void OnEnable()
@@ -71,7 +76,13 @@ public class GameManager : MonoBehaviour
     void ResetGame(Scene scene, LoadSceneMode mode)
     {
         SetDifficulty();
-        OnGameReset?.Invoke();
+        currentSpeed = 0;
+        lerpTime = 0;
+
+        if (SceneManager.GetActiveScene().name == mainGameScene) 
+        {
+            OnGameReset?.Invoke();
+        }
     }
 
     public void SetToEasy() 

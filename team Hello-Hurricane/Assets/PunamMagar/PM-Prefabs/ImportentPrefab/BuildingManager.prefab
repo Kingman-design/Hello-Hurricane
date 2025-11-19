@@ -273,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Side: 0
   Type: 0
-  buildingOffset: {x: 10, y: 0, z: 5}
+  buildingOffset: {x: 20, y: 0, z: 5}
   maxNumOfBuildings: 30
 --- !u!1 &9145714999382637426
 GameObject:
@@ -321,5 +321,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Side: 1
   Type: 0
-  buildingOffset: {x: -10, y: 0, z: 5}
+  buildingOffset: {x: -20, y: 0, z: 5}
   maxNumOfBuildings: 30
