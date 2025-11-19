@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Side: 0
   Type: 1
-  buildingOffset: {x: 50, y: 0, z: 5}
+  buildingOffset: {x: 150, y: 0, z: 5}
   maxNumOfBuildings: 50
 --- !u!1 &3448242569007874044
 GameObject:
@@ -75,7 +75,7 @@ Transform:
   m_GameObject: {fileID: 3448242569007874044}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalPosition: {x: 0, y: 0, z: -150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Side: 1
   Type: 1
-  buildingOffset: {x: -50, y: 0, z: 5}
+  buildingOffset: {x: -150, y: 0, z: 5}
   maxNumOfBuildings: 50
 --- !u!1 &7025762798415235187
 GameObject:
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8937f73a5f0be9d458f77adceb503ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zOffsetRange: 10
+  zOffsetRange: 8
 --- !u!1 &8084194908717785514
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,8 +273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Side: 0
   Type: 0
-  buildingOffset: {x: 5, y: 0, z: 5}
-  maxNumOfBuildings: 50
+  buildingOffset: {x: 20, y: 0, z: 5}
+  maxNumOfBuildings: 30
 --- !u!1 &9145714999382637426
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,5 +321,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Side: 1
   Type: 0
-  buildingOffset: {x: -5, y: 0, z: 5}
-  maxNumOfBuildings: 50
+  buildingOffset: {x: -20, y: 0, z: 5}
+  maxNumOfBuildings: 30

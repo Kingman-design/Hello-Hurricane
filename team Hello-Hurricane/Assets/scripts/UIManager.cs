@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,8 +9,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuTitle;      //title menu
     [SerializeField] GameObject menuDifficulty; //difficulty select
     [SerializeField] GameObject menuPause;      //pause state
-    //[SerializeField] GameObject menuWin;      //currently no win condition
     [SerializeField] GameObject menuLose;       //lose state
+    [SerializeField] GameObject titleUI;
+    [SerializeField] GameObject gameUI;         //in game UI
+    [SerializeField] GameObject playerUI;       //hud      
 
     public bool isPaused;
     float timeScaleOrig;
@@ -17,6 +20,21 @@ public class UIManager : MonoBehaviour
     {
         instance = this;
         timeScaleOrig = Time.timeScale;
+
+        if (SceneManager.GetActiveScene().name == "TitleScene")         //ensure that only the desired menus active 
+        {                                                               //for the appropriate scenes
+            titleUI.SetActive(true);                                    //when loading a new scene in prototype
+        }                                                               //it wont get stuck on the title screen
+        else if (SceneManager.GetActiveScene().name == "Prototype")
+        {
+            gameUI.SetActive(true);
+            playerUI.SetActive(true);
+        }
+
+    }
+    void Start()
+    {
+        Time.timeScale = 1.0f;
     }
     void Update()
     {
@@ -46,7 +64,7 @@ public class UIManager : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = timeScaleOrig;
-        Cursor.visible = false;
+            Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;

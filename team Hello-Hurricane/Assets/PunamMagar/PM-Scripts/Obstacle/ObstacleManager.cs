@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObstacleManager : MonoBehaviour
 {
@@ -23,8 +24,11 @@ public class ObstacleManager : MonoBehaviour
     [SerializeField] private List<GameObject> lanes;
 
     //[Header("")]
+    ObjectPoolerManager poolerManager;
 
-    private bool hasInitialSpwaned = false;
+    //Original Settings
+    //float OriginalSpwanDistance;
+    Vector3 originalSpwanParent;
 
     private void Awake()
     {
@@ -41,25 +45,29 @@ public class ObstacleManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //randSpwanTime = Random.Range(spawnInterval.min, spawnInterval.max);
+        poolerManager = ObjectPoolerManager.Instance;
 
-        
+        gameObject.SetActive(poolerManager.usePunamObstacles);
+
+        originalSpwanParent = spwanParent.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!hasInitialSpwaned) 
-        {
-            for (int i = 0; i < initialSpwan; i++)
-            {
-                SpwanObstacle();
-                spwanParent.position += Vector3.forward * spwanDistance;
-            }
+        //if (!hasInitialSpwaned)
+        //{
+        //    for (int i = 0; i < initialSpwan; i++)
+        //    {
+        //        spwanParent.position += Vector3.forward * spwanDistance;
 
-            spwanParent.position -= Vector3.forward * spwanDistance;
-            hasInitialSpwaned = true;
-        }
+        //        SpwanObstacle();
+        //    }
+
+        //    spwanParent.position -= Vector3.forward * spwanDistance * 2;
+
+        //    hasInitialSpwaned = true;
+        //}
     }
 
     void ShuffleLanes(List<GameObject> _lanes)
@@ -78,12 +86,66 @@ public class ObstacleManager : MonoBehaviour
         ShuffleLanes(lanes);
 
         int lanesToUse = Random.Range(minLanesToSpwan, lanes.Count + 1);
+        bool usingAllLanes = lanesToUse == lanes.Count;
 
         for (int i = 0; i < lanesToUse; i++)
         {
             ObstacleSpwaner currSpawner = lanes[i].GetComponent<ObstacleSpwaner>();
 
-            currSpawner.Spwan();
+            if (i == 0)
+            {
+                currSpawner.SpwanNextObstacleTrigger();
+            }
+
+            if (usingAllLanes && i == lanesToUse - 1)
+            {
+                
+                string prevTag = lanes[i - 1].GetComponent<ObstacleSpwaner>().GetLastObstacleTag();
+                currSpawner.SpwanDifferentThenLast(prevTag);
+                
+            }
+            else
+            {
+                currSpawner.Spwan();
+            }
         }
+    }
+
+    void SpwanInitialObstacle() 
+    {
+        if (!ObjectPoolerManager.Instance.usePunamObstacles) 
+        {
+            return;        
+        }
+
+        for (int i = 0; i < initialSpwan; i++)
+        {
+            spwanParent.position += Vector3.forward * spwanDistance;
+            SpwanObstacle();
+        }
+
+        spwanParent.position -= Vector3.forward * spwanDistance * 2;
+    }
+
+    private void OnEnable()
+    {
+        PlatformManager.OnPlatformSpawned += SpwanInitialObstacle;
+        GameManager.OnGameReset += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        PlatformManager.OnPlatformSpawned -= SpwanInitialObstacle;
+        GameManager.OnGameReset -= OnSceneLoaded;
+    }
+
+    void ResetSettings()
+    {
+        spwanParent.position = originalSpwanParent;
+    }
+
+    void OnSceneLoaded()
+    {
+        ResetSettings();
     }
 }

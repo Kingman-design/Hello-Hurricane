@@ -29,8 +29,10 @@ public class BuildingManager : MonoBehaviour
     {
         Vector3 endPos = _currBuilding.transform.position;
         Renderer currBuldRenderer = _currBuilding.GetComponent<Building>().GetBuildingRenderer();
-
         Renderer _lastBuildingRenderer = _lastBuilding.GetComponent<Building>().GetBuildingRenderer();
+
+        //For random rotation
+        currBuldRenderer.gameObject.transform.localRotation = GetRandomRotation();
 
         if (platformRenderer == null) 
         {
@@ -45,35 +47,31 @@ public class BuildingManager : MonoBehaviour
 
             float halfX = currBuildingBound.extents.x + platformBound.extents.x;
 
-            float halfY = currBuildingBound.extents.y - platformBound.extents.y;
+            float halfY = platformBound.extents.y + currBuildingBound.extents.y;
 
             float halfZ = lastBuildingBound.extents.z + currBuildingBound.extents.z;
 
-            if (isLeftBuilding == true)
-            {
-                endPos.x += halfX;
-            }
-            else 
-            {
-                endPos.x -= halfX;
-            }
-                
+            endPos.x = platformRenderer.transform.position.x + (isLeftBuilding ? +halfX : -halfX);
+
             endPos.y += halfY;
 
             float zOffset = 0f;
             zOffset = Random.Range(_offset.z, _offset.z + zOffsetRange);
 
-            endPos.z += _lastBuilding.transform.position.z + halfZ + zOffset;
-            endPos.z += _offset.z;
-        }
+            endPos.x -= _offset.x;
 
-        return endPos -= _offset;
+            endPos.z += _lastBuilding.transform.position.z + halfZ + zOffset;
+        }
+        return endPos;
     }
 
     public Vector3 GetFinalPosition(GameObject _currBuilding, Vector3 _offset = default(Vector3), bool isLeftBuilding = false)
     {
         Vector3 endPos = _currBuilding.transform.position;
         Renderer currBuldRenderer = _currBuilding.GetComponent<Building>().GetBuildingRenderer();
+
+        //For random rotation
+        currBuldRenderer.gameObject.transform.localRotation = GetRandomRotation();
 
         if (platformRenderer == null)
         {
@@ -87,20 +85,23 @@ public class BuildingManager : MonoBehaviour
 
             float halfX = currBuildingBound.extents.x + platformBound.extents.x;
 
-            float halfY = currBuildingBound.extents.y - platformBound.extents.y;
+            float halfY = platformBound.extents.y + currBuildingBound.extents.y;
 
-            if (isLeftBuilding == true)
-            {
-                endPos.x += halfX;
-            }
-            else
-            {
-                endPos.x -= halfX;
-            }
+            endPos.x = platformRenderer.transform.position.x + (isLeftBuilding ? +halfX : -halfX);
+
+            endPos.x -= _offset.x;
 
             endPos.y += halfY;
         }
 
-        return endPos -= _offset;
+        return endPos;
+    }
+
+
+    float[] rotationAngles = { 0f, 90f, 180f, 270f };
+    public Quaternion GetRandomRotation()
+    {
+        int index = Random.Range(0, rotationAngles.Length);
+        return Quaternion.Euler(0f, rotationAngles[index], 0f);
     }
 }

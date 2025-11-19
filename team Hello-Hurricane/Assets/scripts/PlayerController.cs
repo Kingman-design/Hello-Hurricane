@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     [SerializeField] float targettime;
     [SerializeField] Renderer model;
     [SerializeField] Animator anim;
-    
+
     Vector3 moveDir;
     Vector3 playerVel;
 
@@ -26,10 +27,28 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     float oldcolliderheight;
     Renderer modelstart;
 
+    // Slide
+    bool isSliding;
+    //Vector3 slideDirection;
+    //float slideSpeed;
+    //float slideDuration;
+
+    // Wires
+    bool isElectric;
+    bool canmove;
+    int randomElectric;
+    float wireDuration;
+    float wireInterval;
+    float freezeTime;
+    float wireIntervalTimer;
+    float wireTotalTime;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         oldgravity = gravity;
+        canmove = true;
         oldheight = controller.height;
         oldcolliderheight = collider.height;
         modelstart = model;
@@ -50,11 +69,14 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
                 collider.height = oldcolliderheight;
             }
         }
-        movement();  
+        movement();
     }
 
     void movement()
     {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
         if (controller.isGrounded)
         {
             playerVel = Vector3.zero;
@@ -65,12 +87,44 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
             playerVel.y -= gravity * Time.deltaTime;
         }
 
-        moveDir = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        controller.Move(moveDir * speed * Time.deltaTime);
+        if (isSliding)
+        {
+            //if (slideDuration <= 0)
+            //{
+            //    isSliding = false;
+            //}
+            //controller.Move(slideDirection * slideSpeed * Time.deltaTime);
+            //slideDuration -= Time.deltaTime;
 
-        jump();
-        crouch();
-        controller.Move(playerVel * Time.deltaTime);
+            if (isElectric)
+            {
+                takeDamage(1);
+                isElectric = false;
+                wireIntervalTimer = 0;
+                wireTotalTime = 0;
+            }
+
+        }
+        else if (isElectric)
+        {
+            Electrified();
+
+            if (randomElectric == 0)
+            {
+                StartCoroutine(freezeplayer());
+            }
+
+        }
+
+        if (canmove)
+        {
+            moveDir = horizontal * transform.right + vertical * transform.forward;
+            controller.Move(moveDir * speed * Time.deltaTime);
+            jump();
+            crouch();
+            controller.Move(playerVel * Time.deltaTime);
+        }
+
     }
     void jump()
     {
@@ -100,6 +154,60 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         {
             UIManager.instance.stateLose();
         }
+    }
+
+    //public void StartSlide(Vector3 dir, float duration, float speed)
+    //{
+    //    isSliding = true;
+    //    slideDuration = duration;
+    //    slideSpeed = speed;
+    //    slideDirection = dir;
+    //}
+
+    public void IsOnPuddle()
+    {
+        isSliding = true;
+    }
+
+
+    public void StartWires(float duration, float interval, float freezetime)
+    {
+        isElectric = true;
+        wireInterval = interval;
+        wireDuration = duration;
+        freezeTime = freezetime;
+        wireTotalTime = 0;
+        wireIntervalTimer = 0;
+    }
+
+    private void Electrified()
+    {
+        wireIntervalTimer += Time.deltaTime;
+        wireTotalTime += Time.deltaTime;
+        while (wireTotalTime <= wireDuration && wireIntervalTimer >= wireInterval)
+        {
+            randomElectric = Random.Range(0, 5);
+            wireIntervalTimer = 0;
+        }
+        if (wireTotalTime > wireDuration)
+        {
+            isElectric = false;
+            wireIntervalTimer = 0;
+            wireTotalTime = 0;
+        }
+    }
+
+    IEnumerator freezeplayer()
+    {
+        canmove = false;
+        yield return new WaitForSeconds(freezeTime);
+        canmove = true;
+    }
+
+
+    public Vector3 GetMoveDir()
+    {
+        return moveDir;
     }
 
     public int GetSpeed()

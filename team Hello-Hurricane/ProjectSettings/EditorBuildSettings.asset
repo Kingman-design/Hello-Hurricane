@@ -9,7 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Misael-Scene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Kat/Kathryn-Scene.unity
+    path: Assets/Scenes/TitleScene.unity
+    guid: f52e706c808404a4492a9e42147929b7
+  - enabled: 0
+    path: Assets/Scenes/Kathryn-Scene.unity
     guid: 3b0daf7388fc11c4d989174fc560f68f
   - enabled: 1
     path: Assets/Scenes/Prototype.unity
