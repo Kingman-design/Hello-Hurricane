@@ -5,12 +5,15 @@ using System;
 public class PowerUpBase : MonoBehaviour
 {
     public static PowerUpBase instance;
+    public bool Invincibility;
 
 
     [SerializeField] Renderer model;
+    [SerializeField] GameObject Destroyer;
+    
     Color colorOrigin;
 
-    public enum powerType { SuperJump, Invincibility, Explosion }
+    public enum powerType { SuperJump, Invincibility, Explosion, Flight }
 
     private void Awake()
     {
@@ -36,6 +39,11 @@ public class PowerUpBase : MonoBehaviour
                 break;
             case powerType.Explosion:
                 //Power Explosion
+                StartCoroutine(PowerExplosion(player, duration));
+                break;
+            case powerType.Flight:
+                //Power flight
+                StartCoroutine(PowerFlight(player, duration));
                 break;
         }
 
@@ -57,9 +65,28 @@ public class PowerUpBase : MonoBehaviour
     IEnumerator PowerInvincibility(NewMonoBehaviourScript player, float duration)
     {
         model.material.color = Color.blue;
+        Invincibility = true;
         yield return new WaitForSeconds(duration);
+        Invincibility = false;
         model.material.color = colorOrigin;
     }
 
+    IEnumerator PowerExplosion(NewMonoBehaviourScript player, float duration)
+    {
+        Destroyer.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        Destroyer.SetActive(false);
+    }
+
+    IEnumerator PowerFlight(NewMonoBehaviourScript player, float duration)
+    {
+        model.material.color = Color.cyan;
+        int oldGrav = player.GetGravity();
+        player.SetGravity(0);
+
+        yield return new WaitForSeconds(duration);
+        model.material.color = colorOrigin;
+        player.SetGravity(oldGrav);
+    }
 
 }
