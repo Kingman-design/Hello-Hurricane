@@ -131,13 +131,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3562732937986751115, guid: f6c40205085831149a130b37b8224194, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894227846541265456, guid: f6c40205085831149a130b37b8224194, type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279430144404711076, guid: f6c40205085831149a130b37b8224194, type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497017944284860846, guid: f6c40205085831149a130b37b8224194, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8497017944284860846, guid: f6c40205085831149a130b37b8224194, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8497017944284860846, guid: f6c40205085831149a130b37b8224194, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 8497017944284860846, guid: f6c40205085831149a130b37b8224194, type: 3}
       propertyPath: m_LocalPosition.z
