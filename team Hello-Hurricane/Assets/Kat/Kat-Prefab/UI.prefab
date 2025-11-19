@@ -3407,6 +3407,8 @@ MonoBehaviour:
   invincible: {fileID: 3871660637241395900}
   fly: {fileID: 5411298640456745272}
   explosion: {fileID: 1865809737689043275}
+  Score: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &4290758597805116922
 GameObject:
   m_ObjectHideFlags: 0
@@ -5939,7 +5941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7804713321060112428
 Transform:
   m_ObjectHideFlags: 0
