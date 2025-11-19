@@ -11,6 +11,12 @@ public class ObstacleSpawner : MonoBehaviour
 
     public Transform[] spawnRows;
 
+    // For traps
+    public GameObject[] trapPrefabs;
+    public Transform[] trapRows;
+    [Range(0, 100)] public int trapSpawnChance = 40;
+
+
     public int blockSpawnChance = 100;
     public float blockObstacleProbability = 0.5f;
     private int lastSafeLane = -1;
@@ -46,6 +52,31 @@ public class ObstacleSpawner : MonoBehaviour
             else
             {
                 SpawnMixedObstacles(pointsInRow);
+            }
+        }
+
+        SpawnTraps();
+    }
+
+
+    private void SpawnTraps() // All the traps logic is here
+    {
+        if (trapPrefabs.Length == 0 || trapRows.Length == 0) return;
+
+        for (int i = 0; i < trapRows.Length; i++)
+        {
+            Transform row = trapRows[i];
+
+            if (row.position.z < safeZoneDistance) continue;
+
+            if (Random.Range(0, 100) < trapSpawnChance)
+            {
+                int randomChildIndex = Random.Range(0, row.childCount);
+                Transform spawnPoint = row.GetChild(randomChildIndex);
+
+                GameObject trapToSpawn = trapPrefabs[Random.Range(0, trapPrefabs.Length)];
+
+                Instantiate(trapToSpawn, spawnPoint.position, spawnPoint.rotation, spawnPoint);
             }
         }
     }
