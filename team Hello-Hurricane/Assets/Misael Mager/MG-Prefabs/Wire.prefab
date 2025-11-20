@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2826240177472408121}
   - component: {fileID: 321149844691565419}
   - component: {fileID: 7875102391813688244}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,9 +102,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   damagetank: 0
-  slideDirection: {x: 0, y: 0, z: 0}
-  slideSpeed: 0
-  slideDuration: 0
   wireDuration: 5
   wireInterval: 0.5
   FreezeTime: 0.1

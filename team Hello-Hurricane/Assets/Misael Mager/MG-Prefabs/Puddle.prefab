@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3638801216983236621}
   - component: {fileID: 3615609613239047082}
   - component: {fileID: 4457340160731173660}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Puddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,9 +69,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   damagetank: 0
-  slideDirection: {x: 0, y: 0, z: 0}
-  slideSpeed: 2
-  slideDuration: 10
   wireDuration: 0
   wireInterval: 0
   FreezeTime: 0
@@ -87,7 +84,7 @@ GameObject:
   - component: {fileID: 171021331767497682}
   - component: {fileID: 7565560083946432426}
   - component: {fileID: 871155580057550769}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: puddle -texture
   m_TagString: Untagged
   m_Icon: {fileID: 0}

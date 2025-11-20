@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1194237059680927300}
   - component: {fileID: 464363925232178351}
   - component: {fileID: 2246846684583902168}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 302136211219377242}
   - component: {fileID: 3556239043778137520}
   - component: {fileID: 270620903396359641}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Propane tank 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4919,7 +4919,7 @@ GameObject:
   - component: {fileID: 5955094374232097712}
   - component: {fileID: 6825302365848221413}
   - component: {fileID: 1054271068163281428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Propane Tank -material
   m_TagString: Untagged
   m_Icon: {fileID: 0}
