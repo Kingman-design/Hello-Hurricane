@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using Random = UnityEngine.Random;
 
 public class PowerUpBase : MonoBehaviour
 {
@@ -14,6 +15,21 @@ public class PowerUpBase : MonoBehaviour
     Color colorOrigin;
 
     public enum powerType { SuperJump, Invincibility, Explosion, Flight }
+
+    // power up audio
+    [SerializeField] AudioSource aud;
+
+    [SerializeField] AudioClip[] audSuperJump;
+    [SerializeField][Range(0, 1)] float audSuperJumpVol;
+    [SerializeField] AudioClip[] audInvincible;
+    [SerializeField][Range(0, 1)] float audInvincibleVol;
+    [SerializeField] AudioClip[] audExplosion;
+    [SerializeField][Range(0, 1)] float audExplosionVol;
+    [SerializeField] AudioClip[] audFlight;
+    [SerializeField][Range(0, 1)] float audFlightVol;
+
+
+
 
     private void Awake()
     {
@@ -64,6 +80,9 @@ public class PowerUpBase : MonoBehaviour
 
     IEnumerator SuperJump(NewMonoBehaviourScript player, float duration)
     {
+        // jump audio
+        aud.PlayOneShot(audSuperJump[Random.Range(0, audSuperJump.Length)], audSuperJumpVol);
+
         int oldStat = player.GetJumpSpeed();
         player.SetJumpSpeed(oldStat * 2);
         
@@ -81,6 +100,9 @@ public class PowerUpBase : MonoBehaviour
 
     IEnumerator PowerInvincibility(NewMonoBehaviourScript player, float duration)
     {
+        //invincible audio
+        aud.PlayOneShot(audInvincible[Random.Range(0, audInvincible.Length)], audInvincibleVol);
+
         model.material.color = Color.blue;
         Invincibility = true;
         yield return new WaitForSeconds(duration);
@@ -93,6 +115,9 @@ public class PowerUpBase : MonoBehaviour
 
     IEnumerator PowerExplosion(NewMonoBehaviourScript player, float duration)
     {
+        //explosion audio
+        aud.PlayOneShot(audExplosion[Random.Range(0, audExplosion.Length)], audExplosionVol);
+
         Destroyer.SetActive(true);
         yield return new WaitForSeconds(duration);
         Destroyer.SetActive(false);
@@ -103,6 +128,9 @@ public class PowerUpBase : MonoBehaviour
 
     IEnumerator PowerFlight(NewMonoBehaviourScript player, float duration)
     {
+        //flight audio
+        aud.PlayOneShot(audFlight[Random.Range(0, audFlight.Length)], audFlightVol);
+
         model.material.color = Color.cyan;
         int oldGrav = player.GetGravity();
         player.SetGravity(0);

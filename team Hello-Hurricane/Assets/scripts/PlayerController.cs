@@ -2,11 +2,12 @@ using System.Collections;
 using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
-    [SerializeField] CapsuleCollider collider;
+    [SerializeField] new CapsuleCollider collider;
 
     [SerializeField] int speed;
     [SerializeField] int JumpSpeed;
@@ -45,6 +46,37 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     float wireIntervalTimer;
     float wireTotalTime;
 
+    // Audio
+    [Header("-----Player Audio-----")]
+
+    [SerializeField] AudioSource aud;
+
+    [SerializeField] AudioClip[] audPuddleSplash;
+    [SerializeField][Range(0, 1)] float audPuddleVol;
+    [SerializeField] AudioClip[] audPropaneExplosion;
+    [SerializeField][Range(0, 1)] float audPropaneVol;
+    [SerializeField] AudioClip[] audElectricWires;
+    [SerializeField][Range(0, 1)] float audWiresVol;
+    [SerializeField] AudioClip[] audBG;
+    [SerializeField][Range(0, 1)] float audBGVol;
+    [SerializeField] AudioClip[] audJump;
+    [SerializeField][Range(0, 1)] float audJumpVol;
+    [SerializeField] AudioClip[] audRun;
+    [SerializeField][Range(0, 1)] float audRunVol;
+    [SerializeField] AudioClip[] audSlide;
+    [SerializeField][Range(0, 1)] float audSlideVol;
+    [SerializeField] AudioClip[] audCollision;
+    [SerializeField][Range(0, 1)] float audCollisionVol;
+    [SerializeField] AudioClip[] audPowerUp;
+    [SerializeField][Range(0, 1)] float audPowerUpVol;
+    [SerializeField] AudioClip[] audDeath;
+    [SerializeField][Range(0, 1)] float audDeathVol;
+
+    bool bgPlaying;
+
+    public AudioSource audioSource;
+    public AudioClip pickupPowerupSfx;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -81,7 +113,23 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
             }
         }
         movement();
+
+        //background environment audio
+
+        if (!bgPlaying)
+        {
+            aud.loop = true;
+            aud.clip = audBG[Random.Range(0, audBG.Length)];
+            aud.volume = audBGVol;
+            aud.Play();
+            bgPlaying = true;
+        }
+
+
     }
+
+
+
 
     void movement()
     {
@@ -100,6 +148,10 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 
         if (isSliding)
         {
+            // slide sound
+            if (!aud.isPlaying)
+                aud.PlayOneShot(audSlide[Random.Range(0, audSlide.Length)], audSlideVol);
+
             //if (slideDuration <= 0)
             //{
             //    isSliding = false;
@@ -131,6 +183,13 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         {
             moveDir = horizontal * transform.right + vertical * transform.forward;
             controller.Move(moveDir * speed * Time.deltaTime);
+            //run audio
+            if (controller.isGrounded && moveDir.magnitude > 0.1f && !aud.isPlaying)
+            {
+                aud.PlayOneShot(audRun[Random.Range(0, audRun.Length)], audRunVol);
+            }
+
+
             jump();
             crouch();
             controller.Move(playerVel * Time.deltaTime);
@@ -144,6 +203,9 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
             playerVel.y = JumpSpeed;
             jumpCount++;
             anim.SetTrigger("Jump");
+
+            //jump audio
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
     }
     void crouch()
@@ -159,10 +221,15 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
+        //collision to walls audio
+        aud.PlayOneShot(audCollision[Random.Range(0, audCollision.Length)], audCollisionVol);
         HP -= amount;
 
         if (HP <= 0)
         {
+            // dead audio
+            aud.PlayOneShot(audDeath[Random.Range(0, audDeath.Length)], audDeathVol);
+
             UIManager.instance.stateLose();
         }
     }
@@ -178,6 +245,10 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     public void IsOnPuddle()
     {
         isSliding = true;
+
+        //puddle audio
+        aud.PlayOneShot(audPuddleSplash[Random.Range(0, audPuddleSplash.Length)], audPuddleVol);
+
     }
 
 
@@ -193,6 +264,8 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
 
     private void Electrified()
     {
+        // wire audio
+        aud.PlayOneShot(audElectricWires[Random.Range(0, audElectricWires.Length)], audWiresVol);
         wireIntervalTimer += Time.deltaTime;
         wireTotalTime += Time.deltaTime;
         while (wireTotalTime <= wireDuration && wireIntervalTimer >= wireInterval)
@@ -263,4 +336,13 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         HP = NewHP;
     }
 
+    //audio trigger call
+
+    public void PlayPowerUpSound()
+    {
+        if (audioSource != null && pickupPowerupSfx != null)
+        {
+            audioSource.PlayOneShot(pickupPowerupSfx);
+        }
+    }
 }
