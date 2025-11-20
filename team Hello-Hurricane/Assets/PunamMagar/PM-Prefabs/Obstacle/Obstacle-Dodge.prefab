@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8816883300599937706}
   - component: {fileID: 102821013071790882}
   - component: {fileID: 255963563741591344}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4870991793512178372}
   - component: {fileID: 8706459289622342049}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle-Dodge
   m_TagString: Dodge-MGTest
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 2502767462955554562}
   - component: {fileID: 2727664149458116767}
   - component: {fileID: 1652870368800105537}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
