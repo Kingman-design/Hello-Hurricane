@@ -119,6 +119,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &146387570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 146387572}
+  - component: {fileID: 146387571}
+  m_Layer: 0
+  m_Name: GameManagerTet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &146387571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146387570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56f05e762124019478c4ebedf93f40fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easy_levelDifficulty: {fileID: 11400000, guid: a7aa6415c2a5f084096383ad2f2d2c0b, type: 2}
+  medium_levelDifficulty: {fileID: 11400000, guid: ef8c0bdecdf415c46aad0992901f5b69, type: 2}
+  hard_levelDifficulty: {fileID: 11400000, guid: 2b24e2fa7cdbb11478100d87185e4bd9, type: 2}
+  mainGameScene: 
+  currentSpeed: 0
+--- !u!4 &146387572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146387570}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -57.628727, y: -42.483665, z: 79.92927}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &309117530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,6 +179,10 @@ PrefabInstance:
     - target: {fileID: 1201525335974375460, guid: f6c40205085831149a130b37b8224194, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4992009683530336987, guid: f6c40205085831149a130b37b8224194, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 119
       objectReference: {fileID: 0}
     - target: {fileID: 8497017944284860846, guid: f6c40205085831149a130b37b8224194, type: 3}
       propertyPath: m_LocalPosition.x
@@ -363,6 +416,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 682678710856925512, guid: 8558426eafc471d48a06a69fb0ef1542, type: 3}
+      propertyPath: usePunamObstacles
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 682678710856925512, guid: 8558426eafc471d48a06a69fb0ef1542, type: 3}
       propertyPath: platforms.Array.data[0].size
       value: 15
       objectReference: {fileID: 0}
@@ -413,6 +470,14 @@ PrefabInstance:
     - target: {fileID: 6301513155435238737, guid: 8558426eafc471d48a06a69fb0ef1542, type: 3}
       propertyPath: m_Name
       value: ObjectPoolerManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6301513155435238737, guid: 8558426eafc471d48a06a69fb0ef1542, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6301513155435238737, guid: 8558426eafc471d48a06a69fb0ef1542, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -567,3 +632,4 @@ SceneRoots:
   - {fileID: 493190946}
   - {fileID: 1978634920}
   - {fileID: 309117530}
+  - {fileID: 146387572}

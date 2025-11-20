@@ -16,52 +16,77 @@ public class ObstacleSpawner : MonoBehaviour
     public Transform[] trapRows;
     [Range(0, 100)] public int trapSpawnChance = 40;
 
+    // For Power-Ups
+    public GameObject[] powerUpPrefabs;
+    public Transform[] powerUpRows;
+    [Range(0, 100)] public int powerUpSpawnChance = 25;
+
 
     public int blockSpawnChance = 100;
     public float blockObstacleProbability = 0.5f;
     private int lastSafeLane = -1;
 
-    void OnEnable()
+    bool canSpawn = true;
+
+    void Update()
     {
-        CleanupOldObstacles();
+        Debug.Log("Furst");
 
-        if (transform.position.z < safeZoneDistance) return;
-
-        if (!IsConfigurationValid())
+        if (canSpawn == true)
         {
-            enabled = false;
-            return;
+            CleanupOldObstacles();
+
+            if (transform.position.z < safeZoneDistance) return;
+
+            if (!IsConfigurationValid())
+            {
+                enabled = false;
+                return;
+            }
+
+            for (int i = 0; i < spawnRows.Length; i++)
+            {
+                Transform row = spawnRows[i];
+
+                if (row.position.z < safeZoneDistance) continue;
+
+                List<Transform> pointsInRow = new List<Transform>();
+                for (int j = 0; j < row.childCount; j++)
+                {
+                    pointsInRow.Add(row.GetChild(j));
+                }
+
+                float randomObstacleRoll = Random.value;
+
+                if (randomObstacleRoll < blockObstacleProbability)
+                {
+                    SpawnBlockObstacles(pointsInRow, blockObstaclePrefabs);
+                }
+                else
+                {
+                    SpawnMixedObstacles(pointsInRow);
+                }
+            }
+
+            SpawnTraps();
+            SpawnPowerUps();
+
+            Debug.Log("Second");
+
+            canSpawn = false;
         }
 
-        for (int i = 0; i < spawnRows.Length; i++)
-        {
-            Transform row = spawnRows[i];
+    }
 
-            if (row.position.z < safeZoneDistance) continue;
-
-            List<Transform> pointsInRow = new List<Transform>();
-            for (int j = 0; j < row.childCount; j++)
-            {
-                pointsInRow.Add(row.GetChild(j));
-            }
-
-            float randomObstacleRoll = Random.value;
-
-            if (randomObstacleRoll < blockObstacleProbability)
-            {
-                SpawnBlockObstacles(pointsInRow, blockObstaclePrefabs);
-            }
-            else
-            {
-                SpawnMixedObstacles(pointsInRow);
-            }
-        }
-
-        SpawnTraps();
+    private void OnDisable()
+    {
+        canSpawn = true;
     }
 
     void CleanupOldObstacles()
     {
+
+        // obstacles
         for (int i = 0; i < spawnRows.Length; i++)
         {
             Transform row = spawnRows[i];
@@ -76,6 +101,7 @@ public class ObstacleSpawner : MonoBehaviour
             }
         }
 
+        // traps
         if (trapRows != null)
         {
             for (int i = 0; i < trapRows.Length; i++)
@@ -89,6 +115,21 @@ public class ObstacleSpawner : MonoBehaviour
                     {
                         Destroy(spawnPoint.GetChild(k).gameObject);
                     }
+                }
+            }
+        }
+
+        // power-ups
+        if (powerUpRows != null)
+        {
+            for (int i = 0; i < powerUpRows.Length; i++)
+            {
+                Transform row = powerUpRows[i];
+                for (int j = 0; j < row.childCount; j++)
+                {
+                    Transform spawnPoint = row.GetChild(j);
+                    for (int k = spawnPoint.childCount - 1; k >= 0; k--)
+                        Destroy(spawnPoint.GetChild(k).gameObject);
                 }
             }
         }
@@ -113,6 +154,34 @@ public class ObstacleSpawner : MonoBehaviour
 
                 Instantiate(trapToSpawn, spawnPoint.position, spawnPoint.rotation, spawnPoint);
             }
+        }
+    }
+
+    private void SpawnPowerUps()
+    {
+        if (powerUpPrefabs == null || powerUpPrefabs.Length == 0) return;
+        if (powerUpRows == null || powerUpRows.Length == 0) return;
+
+        for (int i = 0; i < powerUpRows.Length; i++)
+        {
+            Transform row = powerUpRows[i];
+
+            if (row.position.z < safeZoneDistance) continue;
+
+            if (Random.Range(0, 100) >= powerUpSpawnChance)
+                continue;
+
+            // picks a random lane
+            int randomChildIndex = Random.Range(0, row.childCount);
+            Transform spawnPoint = row.GetChild(randomChildIndex);
+
+            if (spawnPoint.childCount > 0)
+                continue;
+
+            GameObject powerToSpawn =
+                powerUpPrefabs[Random.Range(0, powerUpPrefabs.Length)];
+
+            Instantiate(powerToSpawn, spawnPoint.position, spawnPoint.rotation, spawnPoint);
         }
     }
 
