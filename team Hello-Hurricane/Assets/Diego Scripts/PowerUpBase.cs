@@ -32,18 +32,30 @@ public class PowerUpBase : MonoBehaviour
             case powerType.SuperJump:
                 //Power Super Jump
                 StartCoroutine(SuperJump(player, duration));
+
+                //show UI icon
+                UIManager.instance.ShowUI_Icon(Type);
                 break;
             case powerType.Invincibility:
                 //Power invincibility
                 StartCoroutine(PowerInvincibility(player, duration));
+
+                //show UI icon
+                UIManager.instance.ShowUI_Icon(Type);
                 break;
             case powerType.Explosion:
                 //Power Explosion
                 StartCoroutine(PowerExplosion(player, duration));
+
+                //show UI icon
+                UIManager.instance.ShowUI_Icon(Type);
                 break;
             case powerType.Flight:
                 //Power flight
                 StartCoroutine(PowerFlight(player, duration));
+
+                //show UI icon
+                UIManager.instance.ShowUI_Icon(Type);
                 break;
         }
 
@@ -56,9 +68,14 @@ public class PowerUpBase : MonoBehaviour
         player.SetJumpSpeed(oldStat * 2);
         
         model.material.color = Color.green;
+
         yield return new WaitForSeconds(duration);
+
         player.SetJumpSpeed(oldStat);
         model.material.color = colorOrigin;
+
+        //destory UI icon
+        Destroy(UIManager.instance.jumpGO);
     }
 
 
@@ -69,6 +86,9 @@ public class PowerUpBase : MonoBehaviour
         yield return new WaitForSeconds(duration);
         Invincibility = false;
         model.material.color = colorOrigin;
+
+        //destory UI icon
+        Destroy(UIManager.instance.invincibleGO);
     }
 
     IEnumerator PowerExplosion(NewMonoBehaviourScript player, float duration)
@@ -76,6 +96,9 @@ public class PowerUpBase : MonoBehaviour
         Destroyer.SetActive(true);
         yield return new WaitForSeconds(duration);
         Destroyer.SetActive(false);
+
+        //destory UI icon
+        Destroy(UIManager.instance.explosionGO);
     }
 
     IEnumerator PowerFlight(NewMonoBehaviourScript player, float duration)
@@ -87,6 +110,9 @@ public class PowerUpBase : MonoBehaviour
         yield return new WaitForSeconds(duration);
         model.material.color = colorOrigin;
         player.SetGravity(oldGrav);
+
+        //destory UI icon
+        Destroy(UIManager.instance.flyGO);
     }
 
 }

@@ -176,6 +176,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6c40205085831149a130b37b8224194, type: 3}
+--- !u!114 &443270748 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7928057044804940628, guid: f6c40205085831149a130b37b8224194, type: 3}
+  m_PrefabInstance: {fileID: 443270747}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b53b9b7eed77ec4db8766cafcf0dd1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &743951359
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,6 +723,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3880709972881224413, guid: 58868ad731a93c74e981b1c9784a4d0e, type: 3}
+      propertyPath: playerScript
+      value: 
+      objectReference: {fileID: 443270748}
     - target: {fileID: 4436217178387029876, guid: 58868ad731a93c74e981b1c9784a4d0e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1081,6 +1096,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 682678710856925512, guid: 8558426eafc471d48a06a69fb0ef1542, type: 3}
+      propertyPath: usePunamObstacles
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3007497699969728808, guid: 8558426eafc471d48a06a69fb0ef1542, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

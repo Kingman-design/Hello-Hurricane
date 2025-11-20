@@ -18,13 +18,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject playerUI;       //hud      
     //player ui images
     [SerializeField] Image hit1, hit2, hit3;
-    [SerializeField] Image jump, invincible, fly, explosion;
+
+    //power up images
+    [SerializeField] GameObject powerUP;
+    [SerializeField] GameObject jump, invincible, fly, explosion;
 
     public bool isPaused;
     float timeScaleOrig;
 
     public NewMonoBehaviourScript playerScript;   //new
     public TMP_Text ScoreText;
+
+    [HideInInspector]
+    public GameObject jumpGO, invincibleGO, flyGO, explosionGO;
 
     void Awake()
     {
@@ -40,11 +46,12 @@ public class UIManager : MonoBehaviour
             gameUI.SetActive(true);
             playerUI.SetActive(true);
         }
-        playerScript = GetComponent<NewMonoBehaviourScript>();
     }
     void Start()
     {
         Time.timeScale = 1.0f;
+
+        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<NewMonoBehaviourScript>();
     }
     void Update()
     {
@@ -61,6 +68,9 @@ public class UIManager : MonoBehaviour
                 stateUnpause();
             }
         }
+
+        SetScore();
+        SetHealth();
     }
     public void statePause()
     {
@@ -99,7 +109,53 @@ public class UIManager : MonoBehaviour
     }
     public void SetScore()
     {
-        ScoreText.text = ScoreText.ToString();
+        //ScoreText.text = ScoreText.ToString();
         ScoreText.text = GameManager.Instance.GetScoreText();
+    }
+
+    void SetHealth() 
+    {
+        if(playerScript == null) 
+        {
+            return;
+        }
+
+        switch (playerScript.GetHP())
+        {
+            case 3:
+            break;
+
+            case 2: hit1.gameObject.SetActive(true);
+            break;
+
+            case 1: hit2.gameObject.SetActive(true);
+                break;
+
+            default:
+                hit3.gameObject.SetActive(true);
+                break;
+        }
+    }
+
+    public void ShowUI_Icon(PowerUpBase.powerType types) 
+    {
+        switch (types) 
+        {
+            case PowerUpBase.powerType.SuperJump:
+                jumpGO = Instantiate(jump, powerUP.transform);
+                break;
+
+            case PowerUpBase.powerType.Invincibility:
+                invincibleGO = Instantiate(invincible, powerUP.transform);
+                break;
+
+            case PowerUpBase.powerType.Flight:
+                flyGO = Instantiate(fly, powerUP.transform);
+                break;
+
+            case PowerUpBase.powerType.Explosion:
+                explosionGO = Instantiate(explosion, powerUP.transform);
+                break;
+        }
     }
 }
