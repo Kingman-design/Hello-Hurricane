@@ -97,9 +97,9 @@ public class UIManager : MonoBehaviour
         menuActive = menuDifficulty;
         menuActive.SetActive(true);
     }
-    //public void UpdateHearts()
-    //{
-    //    int hp = playerScript.GetHP();
-        
-    //}
+    public void SetScore()
+    {
+        ScoreText.text = ScoreText.ToString();
+        ScoreText.text = GameManager.Instance.GetScoreText();
+    }
 }
