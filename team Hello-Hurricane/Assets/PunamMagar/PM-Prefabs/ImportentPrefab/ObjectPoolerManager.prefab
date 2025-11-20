@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d594651394521143ba5aeb094d2d374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usePunamObstacles: 1
+  usePunamObstacles: 0
   buildings:
   - tag: Building
     prefab: {fileID: 4797302324999418680, guid: cd3986f850f1b614d9da6be43421b0ec, type: 3}

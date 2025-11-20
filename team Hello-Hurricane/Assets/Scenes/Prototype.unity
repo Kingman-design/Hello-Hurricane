@@ -550,6 +550,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InvlPower
       objectReference: {fileID: 0}
+    - target: {fileID: 8315660230544153238, guid: ab1b4ef83b187b145ad9196b48ad6648, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -609,6 +613,10 @@ PrefabInstance:
     - target: {fileID: 2495543255500520804, guid: fef0f36d8c2deca498d2bfa006fdcdaa, type: 3}
       propertyPath: m_Name
       value: FlightPower
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495543255500520804, guid: fef0f36d8c2deca498d2bfa006fdcdaa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -729,7 +737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3813310801125137996, guid: 457db11a2c65d4947be9bb21f410499e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1224,6 +1232,10 @@ PrefabInstance:
     - target: {fileID: 5349345101408382072, guid: d38253380ab7f79498a55ecbef999276, type: 3}
       propertyPath: m_Name
       value: 'JumpPower '
+      objectReference: {fileID: 0}
+    - target: {fileID: 5349345101408382072, guid: d38253380ab7f79498a55ecbef999276, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
