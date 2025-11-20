@@ -17,6 +17,8 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] Animator anim;
 
+    [SerializeField] Vector3 minBound, maxBound;
+
     Vector3 moveDir;
     Vector3 playerVel;
 
@@ -52,6 +54,15 @@ public class NewMonoBehaviourScript : MonoBehaviour, IDamage
         oldheight = controller.height;
         oldcolliderheight = collider.height;
         modelstart = model;
+    }
+
+    void LateUpdate()
+    {
+        Vector3 pos = transform.position;
+
+        pos.x = Mathf.Clamp(pos.x,minBound.x,maxBound.x);
+
+        transform.position = pos;
     }
 
     // Update is called once per frame

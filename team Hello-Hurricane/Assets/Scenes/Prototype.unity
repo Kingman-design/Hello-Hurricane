@@ -143,6 +143,14 @@ PrefabInstance:
       propertyPath: m_Height
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7928057044804940628, guid: f6c40205085831149a130b37b8224194, type: 3}
+      propertyPath: maxBound.x
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928057044804940628, guid: f6c40205085831149a130b37b8224194, type: 3}
+      propertyPath: minBound.x
+      value: -14
+      objectReference: {fileID: 0}
     - target: {fileID: 8497017944284860846, guid: f6c40205085831149a130b37b8224194, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
@@ -1097,6 +1105,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 682678710856925512, guid: 8558426eafc471d48a06a69fb0ef1542, type: 3}
+      propertyPath: usePunamObstacles
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3007497699969728808, guid: 8558426eafc471d48a06a69fb0ef1542, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
