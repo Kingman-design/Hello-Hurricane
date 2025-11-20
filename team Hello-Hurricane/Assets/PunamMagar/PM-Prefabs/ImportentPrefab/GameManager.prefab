@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   easy_levelDifficulty: {fileID: 11400000, guid: a7aa6415c2a5f084096383ad2f2d2c0b, type: 2}
-  medium_levelDifficulty: {fileID: 0}
-  hard_levelDifficulty: {fileID: 0}
+  medium_levelDifficulty: {fileID: 11400000, guid: ef8c0bdecdf415c46aad0992901f5b69, type: 2}
+  hard_levelDifficulty: {fileID: 11400000, guid: 2b24e2fa7cdbb11478100d87185e4bd9, type: 2}
   mainGameScene: Prototype
   currentSpeed: 0
