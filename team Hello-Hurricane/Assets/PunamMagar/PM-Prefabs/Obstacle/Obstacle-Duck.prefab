@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 911625971898824150}
   - component: {fileID: 4968353737710607679}
   - component: {fileID: 7067354469539636272}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 1653865474873836155}
   - component: {fileID: 5425905018406954323}
   - component: {fileID: 6696869109832003462}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 4278513982892688602}
   - component: {fileID: 5649509879494423492}
   - component: {fileID: 3144878647890452813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 1820411482991625831}
   - component: {fileID: 2278582350316647960}
   - component: {fileID: 4390139840851685416}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3993969943776486061}
   - component: {fileID: 7023970912453491902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle-Duck
   m_TagString: Duck-MGTest
   m_Icon: {fileID: 0}

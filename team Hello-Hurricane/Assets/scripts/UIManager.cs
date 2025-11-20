@@ -1,21 +1,31 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-
+    //menus
     [SerializeField] GameObject menuActive;     //set the menu active or inactive
     [SerializeField] GameObject menuTitle;      //title menu
     [SerializeField] GameObject menuDifficulty; //difficulty select
     [SerializeField] GameObject menuPause;      //pause state
     [SerializeField] GameObject menuLose;       //lose state
+    //scene specific ui containters
     [SerializeField] GameObject titleUI;
     [SerializeField] GameObject gameUI;         //in game UI
     [SerializeField] GameObject playerUI;       //hud      
+    //player ui images
+    [SerializeField] Image hit1, hit2, hit3;
+    [SerializeField] Image jump, invincible, fly, explosion;
 
     public bool isPaused;
     float timeScaleOrig;
+
+    public NewMonoBehaviourScript playerScript;   //new
+    public TMP_Text ScoreText;
+
     void Awake()
     {
         instance = this;
@@ -30,7 +40,7 @@ public class UIManager : MonoBehaviour
             gameUI.SetActive(true);
             playerUI.SetActive(true);
         }
-
+        playerScript = GetComponent<NewMonoBehaviourScript>();
     }
     void Start()
     {
@@ -87,4 +97,9 @@ public class UIManager : MonoBehaviour
         menuActive = menuDifficulty;
         menuActive.SetActive(true);
     }
+    //public void UpdateHearts()
+    //{
+    //    int hp = playerScript.GetHP();
+        
+    //}
 }

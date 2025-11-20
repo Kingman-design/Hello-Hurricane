@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5065515131926565796}
   - component: {fileID: 6967024245629342096}
   - component: {fileID: 1652739784617006408}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7841681733302516737}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obstacle_Roll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
