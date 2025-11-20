@@ -21,8 +21,10 @@ public class ObstacleSpawner : MonoBehaviour
     public float blockObstacleProbability = 0.5f;
     private int lastSafeLane = -1;
 
-    void Start()
+    void OnEnable()
     {
+        CleanupOldObstacles();
+
         if (transform.position.z < safeZoneDistance) return;
 
         if (!IsConfigurationValid())
@@ -58,6 +60,39 @@ public class ObstacleSpawner : MonoBehaviour
         SpawnTraps();
     }
 
+    void CleanupOldObstacles()
+    {
+        for (int i = 0; i < spawnRows.Length; i++)
+        {
+            Transform row = spawnRows[i];
+            for (int j = 0; j < row.childCount; j++)
+            {
+                Transform spawnPoint = row.GetChild(j);
+
+                for (int k = spawnPoint.childCount - 1; k >= 0; k--)
+                {
+                    Destroy(spawnPoint.GetChild(k).gameObject);
+                }
+            }
+        }
+
+        if (trapRows != null)
+        {
+            for (int i = 0; i < trapRows.Length; i++)
+            {
+                Transform row = trapRows[i];
+                for (int j = 0; j < row.childCount; j++)
+                {
+                    Transform spawnPoint = row.GetChild(j);
+
+                    for (int k = spawnPoint.childCount - 1; k >= 0; k--)
+                    {
+                        Destroy(spawnPoint.GetChild(k).gameObject);
+                    }
+                }
+            }
+        }
+    }
 
     private void SpawnTraps() // All the traps logic is here
     {
